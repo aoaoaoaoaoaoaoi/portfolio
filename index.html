@@ -4426,27 +4426,87 @@ var $elm$virtual_dom$VirtualDom$attribute = F2(
 			_VirtualDom_noJavaScriptOrHtmlUri(value));
 	});
 var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$header = _VirtualDom_node('header');
+var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$Main$linkItem = F2(
+	function (url, text_) {
+		return A2(
+			$elm$html$Html$li,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$a,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$href('#')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(text_)
+						]))
+				]));
+	});
+var $elm$html$Html$nav = _VirtualDom_node('nav');
+var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Main$main = A2(
-	$elm$html$Html$header,
-	_List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$attribute, 'style', 'height: 500px; background-size: auto 100%; background: url(./image/background.jpg) center center;')
-		]),
+	$elm$html$Html$div,
+	_List_Nil,
 	_List_fromArray(
 		[
 			A2(
-			$elm$html$Html$h1,
+			$elm$html$Html$header,
 			_List_fromArray(
 				[
-					A2($elm$html$Html$Attributes$attribute, 'style', 'position: absolute; margin: auto; top: 0; bottom: 0; left: 0; right: 0; height: 3.2rem; text-align: center')
+					A2($elm$html$Html$Attributes$attribute, 'style', 'height: 500px; background-size: auto 100%; background: url(./image/background.jpg) center center;')
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text('ao\'s portfolio')
+					A2(
+					$elm$html$Html$h1,
+					_List_fromArray(
+						[
+							A2($elm$html$Html$Attributes$attribute, 'style', 'position: absolute; margin: auto; top: 0; bottom: 0; left: 0; right: 0; height: 3.2rem; text-align: center')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('ao\'s portfolio')
+						]))
+				])),
+			A2(
+			$elm$html$Html$nav,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$ul,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2($author$project$Main$linkItem, '#', 'profile'),
+							A2($author$project$Main$linkItem, '#', 'skill'),
+							A2($author$project$Main$linkItem, '#', 'career'),
+							A2($author$project$Main$linkItem, '#', 'contact')
+						]))
 				]))
 		]));
 _Platform_export({'Main':{'init':_VirtualDom_init($author$project$Main$main)(0)(0)}});}(this));

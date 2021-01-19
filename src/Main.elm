@@ -1,7 +1,7 @@
 module Main exposing (main)
 
-import Html exposing (Html, div, h1, header, nav, text)
-import Html.Attributes exposing (attribute, style)
+import Html exposing (Html, a, div, h1, header, li, nav, text, ul)
+import Html.Attributes exposing (attribute, href, style)
 
 
 main : Html msg
@@ -12,5 +12,16 @@ main =
                 [ text "ao's portfolio" ]
             ]
         , nav []
-            []
+            [ ul []
+                [ linkItem "#" "profile"
+                , linkItem "#" "skill"
+                , linkItem "#" "career"
+                , linkItem "#" "contact"
+                ]
+            ]
         ]
+
+
+linkItem : String -> String -> Html msg
+linkItem url text_ =
+    li [] [ a [ href "#" ] [ text text_ ] ]
