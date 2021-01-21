@@ -3,3 +3,14 @@ header{
     background-size: auto 100%;
     background: url(./image/background.jpg) center center;
 }
+
+.title{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3.2rem;
+    text-align: center;
+}

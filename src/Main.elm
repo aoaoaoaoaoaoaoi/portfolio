@@ -1,14 +1,14 @@
 module Main exposing (main)
 
 import Html exposing (Html, a, div, h1, header, li, nav, text, ul)
-import Html.Attributes exposing (attribute, href, style)
+import Html.Attributes exposing (attribute, href, style, class)
 
 
 main : Html msg
 main =
     div []
         [ header []
-            [ h1 [ attribute "style" "position: absolute; margin: auto; top: 0; bottom: 0; left: 0; right: 0; height: 3.2rem; text-align: center" ]
+            [ h1 [ class "title"]
                 [ text "ao's portfolio" ]
             ]
         , nav []
