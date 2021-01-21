@@ -14,3 +14,41 @@ header{
     height: 3.2rem;
     text-align: center;
 }
+
+.gnav-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gnav-item{
+    padding: 0 30px;
+}
+
+ul{
+    padding: 0;
+}
+
+ul, li{
+    list-style: none;
+}
+
+.account:before {
+    font-family: 'Material Icons';
+    content: "\e853";
+}
+
+.lightbulb:before {
+    font-family: 'Material Icons';
+    content: "\e90f";
+}
+
+.card:before {
+    font-family: 'Material Icons';
+    content: "\e8f8";
+}
+
+.mail:before {
+    font-family: 'Material Icons';
+    content: "\e158";
+}

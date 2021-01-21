@@ -4424,15 +4424,26 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$li = _VirtualDom_node('li');
+var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$linkItem = F2(
-	function (url, text_) {
+var $author$project$Main$linkItem = F3(
+	function (url, icon, text_) {
 		return A2(
 			$elm$html$Html$li,
-			_List_Nil,
 			_List_fromArray(
 				[
+					$elm$html$Html$Attributes$class('gnav-item')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$span,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class(icon)
+						]),
+					_List_Nil),
 					A2(
 					$elm$html$Html$a,
 					_List_fromArray(
@@ -4470,18 +4481,24 @@ var $author$project$Main$main = A2(
 				])),
 			A2(
 			$elm$html$Html$nav,
-			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('gnav')
+				]),
 			_List_fromArray(
 				[
 					A2(
 					$elm$html$Html$ul,
-					_List_Nil,
 					_List_fromArray(
 						[
-							A2($author$project$Main$linkItem, '#', 'profile'),
-							A2($author$project$Main$linkItem, '#', 'skill'),
-							A2($author$project$Main$linkItem, '#', 'career'),
-							A2($author$project$Main$linkItem, '#', 'contact')
+							$elm$html$Html$Attributes$class('gnav-list')
+						]),
+					_List_fromArray(
+						[
+							A3($author$project$Main$linkItem, '#', 'account', 'profile'),
+							A3($author$project$Main$linkItem, '#', 'lightbulb', 'skill'),
+							A3($author$project$Main$linkItem, '#', 'card', 'career'),
+							A3($author$project$Main$linkItem, '#', 'mail', 'contact')
 						]))
 				]))
 		]));
