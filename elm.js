@@ -4415,7 +4415,20 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$header = _VirtualDom_node('header');
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $author$project$Main$iconItem = function (icon) {
+	return A2(
+		$elm$html$Html$span,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class(icon)
+			]),
+		_List_Nil);
+};
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
@@ -4424,7 +4437,6 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$li = _VirtualDom_node('li');
-var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$linkItem = F3(
@@ -4437,13 +4449,7 @@ var $author$project$Main$linkItem = F3(
 				]),
 			_List_fromArray(
 				[
-					A2(
-					$elm$html$Html$span,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class(icon)
-						]),
-					_List_Nil),
+					$author$project$Main$iconItem(icon),
 					A2(
 					$elm$html$Html$a,
 					_List_fromArray(
@@ -4457,6 +4463,13 @@ var $author$project$Main$linkItem = F3(
 				]));
 	});
 var $elm$html$Html$nav = _VirtualDom_node('nav');
+var $elm$html$Html$section = _VirtualDom_node('section');
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Main$main = A2(
 	$elm$html$Html$div,
@@ -4495,10 +4508,94 @@ var $author$project$Main$main = A2(
 						]),
 					_List_fromArray(
 						[
-							A3($author$project$Main$linkItem, '#', 'account', 'profile'),
-							A3($author$project$Main$linkItem, '#', 'lightbulb', 'skill'),
+							A3($author$project$Main$linkItem, '#profile-section', 'account', 'about me'),
 							A3($author$project$Main$linkItem, '#', 'card', 'career'),
+							A3($author$project$Main$linkItem, '#', 'lightbulb', 'skill'),
+							A3($author$project$Main$linkItem, '#', 'hart', 'hobby'),
 							A3($author$project$Main$linkItem, '#', 'mail', 'contact')
+						]))
+				])),
+			A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('content')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$section,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$id('profile-section')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('inner')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('section-heading')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$h2,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('heading-primary')
+												]),
+											_List_fromArray(
+												[
+													$author$project$Main$iconItem('account'),
+													$elm$html$Html$text('about me')
+												]))
+										])),
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('two-column-wrapper')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$div,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('two-column-left')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$img,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('profile-image'),
+															$elm$html$Html$Attributes$src('./image/profile.jpeg')
+														]),
+													_List_Nil)
+												])),
+											A2(
+											$elm$html$Html$div,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('two-column-right')
+												]),
+											_List_fromArray(
+												[
+													$elm$html$Html$text('テキスト')
+												]))
+										]))
+								]))
 						]))
 				]))
 		]));
