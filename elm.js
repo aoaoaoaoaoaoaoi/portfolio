@@ -4449,6 +4449,7 @@ var $author$project$Main$displayName = function (sectionType) {
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$header = _VirtualDom_node('header');
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Main$iconItem = function (icon) {
@@ -4558,7 +4559,7 @@ var $author$project$Main$main = A2(
 							$author$project$Main$displayName($author$project$Main$Skill)),
 							A3(
 							$author$project$Main$linkItem,
-							'#',
+							'#hobby-section',
 							$author$project$Main$displayIcon($author$project$Main$Hobby),
 							$author$project$Main$displayName($author$project$Main$Hobby)),
 							A3(
@@ -4799,6 +4800,180 @@ var $author$project$Main$main = A2(
 													_List_fromArray(
 														[
 															$elm$html$Html$text('AWS(EC2, RDS, S3)')
+														]))
+												]))
+										]))
+								]))
+						])),
+					A2(
+					$elm$html$Html$section,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$id('hobby-section')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('inner')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('section-heading')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$h2,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('heading-primary')
+												]),
+											_List_fromArray(
+												[
+													$author$project$Main$iconItem(
+													$author$project$Main$displayIcon($author$project$Main$Hobby)),
+													$elm$html$Html$text(
+													$author$project$Main$displayName($author$project$Main$Hobby))
+												]))
+										])),
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('section-content')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$div,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('section-inner-content')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$div,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('section-inner-content-heading')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															$elm$html$Html$h3,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	$elm$html$Html$text('Reading technical books')
+																]))
+														]))
+												])),
+											A2(
+											$elm$html$Html$div,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('section-inner-content')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$div,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('section-inner-content-heading')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															$elm$html$Html$h3,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	$elm$html$Html$text('Writing technical articles')
+																]))
+														]))
+												])),
+											A2(
+											$elm$html$Html$div,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('section-inner-content')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$div,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('section-inner-content-heading')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															$elm$html$Html$h3,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	$elm$html$Html$text('Participation in competitive programming')
+																]))
+														]))
+												])),
+											A2(
+											$elm$html$Html$div,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('section-inner-content')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$div,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('section-inner-content-heading')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															$elm$html$Html$h3,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	$elm$html$Html$text('Creating in free time')
+																]))
+														]))
+												])),
+											A2(
+											$elm$html$Html$div,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('section-inner-content')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$div,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('section-inner-content-heading')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															$elm$html$Html$h3,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	$elm$html$Html$text('Creating Games')
+																]))
 														]))
 												]))
 										]))

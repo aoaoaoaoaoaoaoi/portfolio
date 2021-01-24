@@ -16,7 +16,7 @@ main =
                 [ linkItem "#profile-section" (displayIcon Profile) (displayName Profile)
                 , linkItem "#career-section" (displayIcon Career) (displayName Career)
                 , linkItem "#skill-section" (displayIcon Skill) (displayName Skill)
-                , linkItem "#" (displayIcon Hobby) (displayName Hobby)
+                , linkItem "#hobby-section" (displayIcon Hobby) (displayName Hobby)
                 , linkItem "#" (displayIcon Contact) (displayName Contact)
                 ]
             ]
@@ -67,6 +67,43 @@ main =
                             , li [] [ text "PHP(Laravel)" ]
                             , li [] [ text "MySQL" ]
                             , li [] [ text "AWS(EC2, RDS, S3)" ]
+                            ]
+                        ]
+                    ]
+                ]
+            , section [ id "hobby-section" ]
+                [ div [ class "inner" ]
+                    [ div [ class "section-heading" ]
+                        [ h2 [ class "heading-primary" ]
+                            [ iconItem (displayIcon Hobby)
+                            , text (displayName Hobby)
+                            ]
+                        ]
+                    , div [ class "section-content" ]
+                        [ div [ class "section-inner-content" ]
+                            [ div [ class "section-inner-content-heading" ]
+                                [ h3 [] [ text "Reading technical books" ]
+                                ]
+                            ]
+                        , div [ class "section-inner-content" ]
+                            [ div [ class "section-inner-content-heading" ]
+                                [ h3 [] [ text "Writing technical articles" ]
+                                ]
+                            ]
+                        , div [ class "section-inner-content" ]
+                            [ div [ class "section-inner-content-heading" ]
+                                [ h3 [] [ text "Participation in competitive programming" ]
+                                ]
+                            ]
+                        , div [ class "section-inner-content" ]
+                            [ div [ class "section-inner-content-heading" ]
+                                [ h3 [] [ text "Creating in free time" ]
+                                ]
+                            ]
+                        , div [ class "section-inner-content" ]
+                            [ div [ class "section-inner-content-heading" ]
+                                [ h3 [] [ text "Creating Games" ]
+                                ]
                             ]
                         ]
                     ]
