@@ -4404,6 +4404,11 @@ var $elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
+var $author$project$Main$Career = {$: 'Career'};
+var $author$project$Main$Contact = {$: 'Contact'};
+var $author$project$Main$Hobby = {$: 'Hobby'};
+var $author$project$Main$Profile = {$: 'Profile'};
+var $author$project$Main$Skill = {$: 'Skill'};
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -4413,6 +4418,34 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			$elm$json$Json$Encode$string(string));
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $author$project$Main$displayIcon = function (sectionType) {
+	switch (sectionType.$) {
+		case 'Profile':
+			return 'account';
+		case 'Career':
+			return 'card';
+		case 'Skill':
+			return 'lightbulb';
+		case 'Hobby':
+			return 'hart';
+		default:
+			return 'mail';
+	}
+};
+var $author$project$Main$displayName = function (sectionType) {
+	switch (sectionType.$) {
+		case 'Profile':
+			return 'PROFILE';
+		case 'Career':
+			return 'CAREER';
+		case 'Skill':
+			return 'SKILL';
+		case 'Hobby':
+			return 'HOBBY';
+		default:
+			return 'CONTACT';
+	}
+};
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
@@ -4508,11 +4541,31 @@ var $author$project$Main$main = A2(
 						]),
 					_List_fromArray(
 						[
-							A3($author$project$Main$linkItem, '#profile-section', 'account', 'about me'),
-							A3($author$project$Main$linkItem, '#', 'card', 'career'),
-							A3($author$project$Main$linkItem, '#', 'lightbulb', 'skill'),
-							A3($author$project$Main$linkItem, '#', 'hart', 'hobby'),
-							A3($author$project$Main$linkItem, '#', 'mail', 'contact')
+							A3(
+							$author$project$Main$linkItem,
+							'#profile-section',
+							$author$project$Main$displayIcon($author$project$Main$Profile),
+							$author$project$Main$displayName($author$project$Main$Profile)),
+							A3(
+							$author$project$Main$linkItem,
+							'#',
+							$author$project$Main$displayIcon($author$project$Main$Career),
+							$author$project$Main$displayName($author$project$Main$Career)),
+							A3(
+							$author$project$Main$linkItem,
+							'#',
+							$author$project$Main$displayIcon($author$project$Main$Skill),
+							$author$project$Main$displayName($author$project$Main$Skill)),
+							A3(
+							$author$project$Main$linkItem,
+							'#',
+							$author$project$Main$displayIcon($author$project$Main$Hobby),
+							$author$project$Main$displayName($author$project$Main$Hobby)),
+							A3(
+							$author$project$Main$linkItem,
+							'#',
+							$author$project$Main$displayIcon($author$project$Main$Contact),
+							$author$project$Main$displayName($author$project$Main$Contact))
 						]))
 				])),
 			A2(
@@ -4555,8 +4608,10 @@ var $author$project$Main$main = A2(
 												]),
 											_List_fromArray(
 												[
-													$author$project$Main$iconItem('account'),
-													$elm$html$Html$text('about me')
+													$author$project$Main$iconItem(
+													$author$project$Main$displayIcon($author$project$Main$Profile)),
+													$elm$html$Html$text(
+													$author$project$Main$displayName($author$project$Main$Profile))
 												]))
 										])),
 									A2(
