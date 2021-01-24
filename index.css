@@ -27,11 +27,11 @@ header{
     padding: 0 30px;
 }
 
-ul{
+.gnav > ul{
     padding: 0;
 }
 
-ul, li{
+.gnav > ul, .gnav > li{
     list-style: none;
 }
 
@@ -74,6 +74,10 @@ ul, li{
     text-align: center;
 }
 
+.section-content{
+    width: 80%;  
+    margin: 0 auto;
+}
 
 /*profile*/
 .profile-image{
@@ -82,9 +86,7 @@ ul, li{
 }
 
 .two-column-wrapper{
-    width: 80%;
     display: flex;
-    margin: 0 auto;
 }
 
 .two-column-left{

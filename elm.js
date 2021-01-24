@@ -4462,6 +4462,7 @@ var $author$project$Main$iconItem = function (icon) {
 };
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$img = _VirtualDom_node('img');
+var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
@@ -4469,7 +4470,6 @@ var $elm$html$Html$Attributes$href = function (url) {
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
-var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$linkItem = F3(
@@ -4548,12 +4548,12 @@ var $author$project$Main$main = A2(
 							$author$project$Main$displayName($author$project$Main$Profile)),
 							A3(
 							$author$project$Main$linkItem,
-							'#',
+							'#career-section',
 							$author$project$Main$displayIcon($author$project$Main$Career),
 							$author$project$Main$displayName($author$project$Main$Career)),
 							A3(
 							$author$project$Main$linkItem,
-							'#',
+							'#skill-section',
 							$author$project$Main$displayIcon($author$project$Main$Skill),
 							$author$project$Main$displayName($author$project$Main$Skill)),
 							A3(
@@ -4618,7 +4618,7 @@ var $author$project$Main$main = A2(
 									$elm$html$Html$div,
 									_List_fromArray(
 										[
-											$elm$html$Html$Attributes$class('two-column-wrapper')
+											$elm$html$Html$Attributes$class('two-column-wrapper section-content')
 										]),
 									_List_fromArray(
 										[
@@ -4648,6 +4648,158 @@ var $author$project$Main$main = A2(
 											_List_fromArray(
 												[
 													$elm$html$Html$text('テキスト')
+												]))
+										]))
+								]))
+						])),
+					A2(
+					$elm$html$Html$section,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$id('career-section')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('inner')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('section-heading')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$h2,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('heading-primary')
+												]),
+											_List_fromArray(
+												[
+													$author$project$Main$iconItem(
+													$author$project$Main$displayIcon($author$project$Main$Career)),
+													$elm$html$Html$text(
+													$author$project$Main$displayName($author$project$Main$Career))
+												]))
+										])),
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('section-content')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$ul,
+											_List_Nil,
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$li,
+													_List_Nil,
+													_List_fromArray(
+														[
+															$elm$html$Html$text('2017- social game engineer (Unity, PHP)')
+														]))
+												]))
+										]))
+								]))
+						])),
+					A2(
+					$elm$html$Html$section,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$id('skill-section')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('inner')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('section-heading')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$h2,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('heading-primary')
+												]),
+											_List_fromArray(
+												[
+													$author$project$Main$iconItem(
+													$author$project$Main$displayIcon($author$project$Main$Skill)),
+													$elm$html$Html$text(
+													$author$project$Main$displayName($author$project$Main$Skill))
+												]))
+										])),
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('section-content')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$ul,
+											_List_Nil,
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$li,
+													_List_Nil,
+													_List_fromArray(
+														[
+															$elm$html$Html$text('Unity')
+														])),
+													A2(
+													$elm$html$Html$li,
+													_List_Nil,
+													_List_fromArray(
+														[
+															$elm$html$Html$text('C#')
+														])),
+													A2(
+													$elm$html$Html$li,
+													_List_Nil,
+													_List_fromArray(
+														[
+															$elm$html$Html$text('PHP(Laravel)')
+														])),
+													A2(
+													$elm$html$Html$li,
+													_List_Nil,
+													_List_fromArray(
+														[
+															$elm$html$Html$text('MySQL')
+														])),
+													A2(
+													$elm$html$Html$li,
+													_List_Nil,
+													_List_fromArray(
+														[
+															$elm$html$Html$text('AWS(EC2, RDS, S3)')
+														]))
 												]))
 										]))
 								]))
