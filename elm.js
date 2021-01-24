@@ -4409,6 +4409,7 @@ var $author$project$Main$Contact = {$: 'Contact'};
 var $author$project$Main$Hobby = {$: 'Hobby'};
 var $author$project$Main$Profile = {$: 'Profile'};
 var $author$project$Main$Skill = {$: 'Skill'};
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -4451,6 +4452,12 @@ var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$header = _VirtualDom_node('header');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Main$iconItem = function (icon) {
 	return A2(
@@ -4464,13 +4471,6 @@ var $author$project$Main$iconItem = function (icon) {
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$li = _VirtualDom_node('li');
-var $elm$html$Html$a = _VirtualDom_node('a');
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$linkItem = F3(
@@ -4874,6 +4874,28 @@ var $author$project$Main$main = A2(
 																[
 																	$elm$html$Html$text('Reading technical books')
 																]))
+														])),
+													A2(
+													$elm$html$Html$div,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('section-inner-content-content')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															$elm$html$Html$ul,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	A2(
+																	$elm$html$Html$li,
+																	_List_Nil,
+																	_List_fromArray(
+																		[
+																			$elm$html$Html$text('anything')
+																		]))
+																]))
 														]))
 												])),
 											A2(
@@ -4898,6 +4920,67 @@ var $author$project$Main$main = A2(
 															_List_fromArray(
 																[
 																	$elm$html$Html$text('Writing technical articles')
+																]))
+														])),
+													A2(
+													$elm$html$Html$div,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('section-inner-content-content')
+														]),
+													_List_fromArray(
+														[
+															A2(
+															$elm$html$Html$ul,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	A2(
+																	$elm$html$Html$li,
+																	_List_Nil,
+																	_List_fromArray(
+																		[
+																			A2(
+																			$elm$html$Html$a,
+																			_List_fromArray(
+																				[
+																					$elm$html$Html$Attributes$href('http://bit.ly/3lrL7Ey')
+																				]),
+																			_List_fromArray(
+																				[
+																					$elm$html$Html$text('Qiita')
+																				]))
+																		])),
+																	A2(
+																	$elm$html$Html$div,
+																	_List_Nil,
+																	_List_fromArray(
+																		[
+																			$elm$html$Html$text('About technical matters')
+																		])),
+																	A2(
+																	$elm$html$Html$li,
+																	_List_Nil,
+																	_List_fromArray(
+																		[
+																			A2(
+																			$elm$html$Html$a,
+																			_List_fromArray(
+																				[
+																					$elm$html$Html$Attributes$href('http://bit.ly/2HXTRo9')
+																				]),
+																			_List_fromArray(
+																				[
+																					$elm$html$Html$text('Hatena Blog')
+																				]))
+																		])),
+																	A2(
+																	$elm$html$Html$div,
+																	_List_Nil,
+																	_List_fromArray(
+																		[
+																			$elm$html$Html$text('About non-technical skills and competition programming related')
+																		]))
 																]))
 														]))
 												])),
