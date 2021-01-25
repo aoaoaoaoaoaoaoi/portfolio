@@ -13,22 +13,17 @@ main =
             ]
         , nav [ class "gnav" ]
             [ ul [ class "gnav-list" ]
-                [ linkItem "#profile-section" (displayIcon Profile) (displayName Profile)
-                , linkItem "#career-section" (displayIcon Career) (displayName Career)
-                , linkItem "#skill-section" (displayIcon Skill) (displayName Skill)
-                , linkItem "#hobby-section" (displayIcon Hobby) (displayName Hobby)
-                , linkItem "#" (displayIcon Contact) (displayName Contact)
+                [ linkItem Profile
+                , linkItem Career
+                , linkItem Skill
+                , linkItem Hobby
+                , linkItem Contact
                 ]
             ]
         , div [ class "content" ]
-            [ section [ id "profile-section" ]
+            [ section [ id (sectionId Profile) ]
                 [ div [ class "inner" ]
-                    [ div [ class "section-heading" ]
-                        [ h2 [ class "heading-primary" ]
-                            [ iconItem (displayIcon Profile)
-                            , text (displayName Profile)
-                            ]
-                        ]
+                    [ sectionHeader Profile
                     , div [ class "two-column-wrapper section-content" ]
                         [ div [ class "two-column-left" ]
                             [ img [ class "profile-image", src "./image/profile.jpeg" ] []
@@ -38,28 +33,18 @@ main =
                         ]
                     ]
                 ]
-            , section [ id "career-section" ]
+            , section [ id (sectionId Career) ]
                 [ div [ class "inner" ]
-                    [ div [ class "section-heading" ]
-                        [ h2 [ class "heading-primary" ]
-                            [ iconItem (displayIcon Career)
-                            , text (displayName Career)
-                            ]
-                        ]
+                    [ sectionHeader Career
                     , div [ class "section-content" ]
                         [ ul []
                             [ li [] [ text "2017- social game engineer (Unity, PHP)" ] ]
                         ]
                     ]
                 ]
-            , section [ id "skill-section" ]
+            , section [ id (sectionId Skill) ]
                 [ div [ class "inner" ]
-                    [ div [ class "section-heading" ]
-                        [ h2 [ class "heading-primary" ]
-                            [ iconItem (displayIcon Skill)
-                            , text (displayName Skill)
-                            ]
-                        ]
+                    [ sectionHeader Skill
                     , div [ class "section-content" ]
                         [ ul []
                             [ li [] [ text "Unity" ]
@@ -71,14 +56,9 @@ main =
                         ]
                     ]
                 ]
-            , section [ id "hobby-section" ]
+            , section [ id (sectionId Hobby) ]
                 [ div [ class "inner" ]
-                    [ div [ class "section-heading" ]
-                        [ h2 [ class "heading-primary" ]
-                            [ iconItem (displayIcon Hobby)
-                            , text (displayName Hobby)
-                            ]
-                        ]
+                    [ sectionHeader Hobby
                     , div [ class "section-content" ]
                         [ div [ class "section-inner-content" ]
                             [ div [ class "section-inner-content-heading" ]
@@ -123,16 +103,34 @@ main =
         ]
 
 
-linkItem : String -> String -> String -> Html msg
-linkItem url icon text_ =
-    li [ class "gnav-item" ] [ iconItem icon, a [ href "#" ] [ text text_ ] ]
+{-| navigation
+-}
+linkItem : SectionType -> Html msg
+linkItem sectionType =
+    li [ class "gnav-item" ] [ iconItem (displayIcon sectionType), a [ href ("#" ++ sectionId sectionType) ] [ text (displayName sectionType) ] ]
 
 
+{-| icon
+-}
 iconItem : String -> Html msg
 iconItem icon =
     span [ class icon ] []
 
 
+{-| section header
+-}
+sectionHeader : SectionType -> Html msg
+sectionHeader sectionType =
+    div [ class "section-heading" ]
+        [ h2 [ class "heading-primary" ]
+            [ iconItem (displayIcon sectionType)
+            , text (displayName sectionType)
+            ]
+        ]
+
+
+{-| section type(enum)
+-}
 type SectionType
     = Profile
     | Career
@@ -141,6 +139,8 @@ type SectionType
     | Contact
 
 
+{-| iconName
+-}
 displayIcon : SectionType -> String
 displayIcon sectionType =
     case sectionType of
@@ -160,6 +160,8 @@ displayIcon sectionType =
             "mail"
 
 
+{-| display name of section type
+-}
 displayName : SectionType -> String
 displayName sectionType =
     case sectionType of
@@ -177,3 +179,24 @@ displayName sectionType =
 
         Contact ->
             "CONTACT"
+
+
+{-| display name of section type
+-}
+sectionId : SectionType -> String
+sectionId sectionType =
+    case sectionType of
+        Profile ->
+            "profile-section"
+
+        Career ->
+            "career-section"
+
+        Skill ->
+            "skill-section"
+
+        Hobby ->
+            "hobby-section"
+
+        Contact ->
+            "contact-section"

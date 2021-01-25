@@ -4419,6 +4419,19 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			$elm$json$Json$Encode$string(string));
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$html$Html$h3 = _VirtualDom_node('h3');
+var $elm$html$Html$header = _VirtualDom_node('header');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$img = _VirtualDom_node('img');
+var $elm$html$Html$li = _VirtualDom_node('li');
 var $author$project$Main$displayIcon = function (sectionType) {
 	switch (sectionType.$) {
 		case 'Profile':
@@ -4447,17 +4460,6 @@ var $author$project$Main$displayName = function (sectionType) {
 			return 'CONTACT';
 	}
 };
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$h1 = _VirtualDom_node('h1');
-var $elm$html$Html$h2 = _VirtualDom_node('h2');
-var $elm$html$Html$h3 = _VirtualDom_node('h3');
-var $elm$html$Html$header = _VirtualDom_node('header');
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Main$iconItem = function (icon) {
 	return A2(
@@ -4468,36 +4470,74 @@ var $author$project$Main$iconItem = function (icon) {
 			]),
 		_List_Nil);
 };
-var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
-var $elm$html$Html$img = _VirtualDom_node('img');
-var $elm$html$Html$li = _VirtualDom_node('li');
+var $author$project$Main$sectionId = function (sectionType) {
+	switch (sectionType.$) {
+		case 'Profile':
+			return 'profile-section';
+		case 'Career':
+			return 'career-section';
+		case 'Skill':
+			return 'skill-section';
+		case 'Hobby':
+			return 'hobby-section';
+		default:
+			return 'contact-section';
+	}
+};
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$linkItem = F3(
-	function (url, icon, text_) {
-		return A2(
-			$elm$html$Html$li,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('gnav-item')
-				]),
-			_List_fromArray(
-				[
-					$author$project$Main$iconItem(icon),
-					A2(
-					$elm$html$Html$a,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$href('#')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text(text_)
-						]))
-				]));
-	});
+var $author$project$Main$linkItem = function (sectionType) {
+	return A2(
+		$elm$html$Html$li,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('gnav-item')
+			]),
+		_List_fromArray(
+			[
+				$author$project$Main$iconItem(
+				$author$project$Main$displayIcon(sectionType)),
+				A2(
+				$elm$html$Html$a,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$href(
+						'#' + $author$project$Main$sectionId(sectionType))
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$author$project$Main$displayName(sectionType))
+					]))
+			]));
+};
 var $elm$html$Html$nav = _VirtualDom_node('nav');
 var $elm$html$Html$section = _VirtualDom_node('section');
+var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $author$project$Main$sectionHeader = function (sectionType) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('section-heading')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$h2,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('heading-primary')
+					]),
+				_List_fromArray(
+					[
+						$author$project$Main$iconItem(
+						$author$project$Main$displayIcon(sectionType)),
+						$elm$html$Html$text(
+						$author$project$Main$displayName(sectionType))
+					]))
+			]));
+};
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -4542,31 +4582,11 @@ var $author$project$Main$main = A2(
 						]),
 					_List_fromArray(
 						[
-							A3(
-							$author$project$Main$linkItem,
-							'#profile-section',
-							$author$project$Main$displayIcon($author$project$Main$Profile),
-							$author$project$Main$displayName($author$project$Main$Profile)),
-							A3(
-							$author$project$Main$linkItem,
-							'#career-section',
-							$author$project$Main$displayIcon($author$project$Main$Career),
-							$author$project$Main$displayName($author$project$Main$Career)),
-							A3(
-							$author$project$Main$linkItem,
-							'#skill-section',
-							$author$project$Main$displayIcon($author$project$Main$Skill),
-							$author$project$Main$displayName($author$project$Main$Skill)),
-							A3(
-							$author$project$Main$linkItem,
-							'#hobby-section',
-							$author$project$Main$displayIcon($author$project$Main$Hobby),
-							$author$project$Main$displayName($author$project$Main$Hobby)),
-							A3(
-							$author$project$Main$linkItem,
-							'#',
-							$author$project$Main$displayIcon($author$project$Main$Contact),
-							$author$project$Main$displayName($author$project$Main$Contact))
+							$author$project$Main$linkItem($author$project$Main$Profile),
+							$author$project$Main$linkItem($author$project$Main$Career),
+							$author$project$Main$linkItem($author$project$Main$Skill),
+							$author$project$Main$linkItem($author$project$Main$Hobby),
+							$author$project$Main$linkItem($author$project$Main$Contact)
 						]))
 				])),
 			A2(
@@ -4581,7 +4601,8 @@ var $author$project$Main$main = A2(
 					$elm$html$Html$section,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$id('profile-section')
+							$elm$html$Html$Attributes$id(
+							$author$project$Main$sectionId($author$project$Main$Profile))
 						]),
 					_List_fromArray(
 						[
@@ -4593,28 +4614,7 @@ var $author$project$Main$main = A2(
 								]),
 							_List_fromArray(
 								[
-									A2(
-									$elm$html$Html$div,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$class('section-heading')
-										]),
-									_List_fromArray(
-										[
-											A2(
-											$elm$html$Html$h2,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$class('heading-primary')
-												]),
-											_List_fromArray(
-												[
-													$author$project$Main$iconItem(
-													$author$project$Main$displayIcon($author$project$Main$Profile)),
-													$elm$html$Html$text(
-													$author$project$Main$displayName($author$project$Main$Profile))
-												]))
-										])),
+									$author$project$Main$sectionHeader($author$project$Main$Profile),
 									A2(
 									$elm$html$Html$div,
 									_List_fromArray(
@@ -4657,7 +4657,8 @@ var $author$project$Main$main = A2(
 					$elm$html$Html$section,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$id('career-section')
+							$elm$html$Html$Attributes$id(
+							$author$project$Main$sectionId($author$project$Main$Career))
 						]),
 					_List_fromArray(
 						[
@@ -4669,28 +4670,7 @@ var $author$project$Main$main = A2(
 								]),
 							_List_fromArray(
 								[
-									A2(
-									$elm$html$Html$div,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$class('section-heading')
-										]),
-									_List_fromArray(
-										[
-											A2(
-											$elm$html$Html$h2,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$class('heading-primary')
-												]),
-											_List_fromArray(
-												[
-													$author$project$Main$iconItem(
-													$author$project$Main$displayIcon($author$project$Main$Career)),
-													$elm$html$Html$text(
-													$author$project$Main$displayName($author$project$Main$Career))
-												]))
-										])),
+									$author$project$Main$sectionHeader($author$project$Main$Career),
 									A2(
 									$elm$html$Html$div,
 									_List_fromArray(
@@ -4719,7 +4699,8 @@ var $author$project$Main$main = A2(
 					$elm$html$Html$section,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$id('skill-section')
+							$elm$html$Html$Attributes$id(
+							$author$project$Main$sectionId($author$project$Main$Skill))
 						]),
 					_List_fromArray(
 						[
@@ -4731,28 +4712,7 @@ var $author$project$Main$main = A2(
 								]),
 							_List_fromArray(
 								[
-									A2(
-									$elm$html$Html$div,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$class('section-heading')
-										]),
-									_List_fromArray(
-										[
-											A2(
-											$elm$html$Html$h2,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$class('heading-primary')
-												]),
-											_List_fromArray(
-												[
-													$author$project$Main$iconItem(
-													$author$project$Main$displayIcon($author$project$Main$Skill)),
-													$elm$html$Html$text(
-													$author$project$Main$displayName($author$project$Main$Skill))
-												]))
-										])),
+									$author$project$Main$sectionHeader($author$project$Main$Skill),
 									A2(
 									$elm$html$Html$div,
 									_List_fromArray(
@@ -4809,7 +4769,8 @@ var $author$project$Main$main = A2(
 					$elm$html$Html$section,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$id('hobby-section')
+							$elm$html$Html$Attributes$id(
+							$author$project$Main$sectionId($author$project$Main$Hobby))
 						]),
 					_List_fromArray(
 						[
@@ -4821,28 +4782,7 @@ var $author$project$Main$main = A2(
 								]),
 							_List_fromArray(
 								[
-									A2(
-									$elm$html$Html$div,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$class('section-heading')
-										]),
-									_List_fromArray(
-										[
-											A2(
-											$elm$html$Html$h2,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$class('heading-primary')
-												]),
-											_List_fromArray(
-												[
-													$author$project$Main$iconItem(
-													$author$project$Main$displayIcon($author$project$Main$Hobby)),
-													$elm$html$Html$text(
-													$author$project$Main$displayName($author$project$Main$Hobby))
-												]))
-										])),
+									$author$project$Main$sectionHeader($author$project$Main$Hobby),
 									A2(
 									$elm$html$Html$div,
 									_List_fromArray(
