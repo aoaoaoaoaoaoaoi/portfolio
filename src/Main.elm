@@ -159,8 +159,11 @@ view model =
                                 [ h3 [] [ text "Participation in competitive programming" ]
                                 ]
                             , div [ class "section-inner-content-content" ]
-                                [ ul [] [ li [] [ text "AtCoder" ] ]
-                                , div [] [ text (competitiveInfo model.userState) ]
+                                [ ul []
+                                    [ li [] [ a [ href "https://atcoder.jp/" ] [ text "AtCoder" ] ]
+                                    , div [] [ span [] [ text "Name : " ], a [ href "https://atcoder.jp/users/aochan" ] [ text "aochan" ] ]
+                                    , competitiveInfo model.userState
+                                    ]
                                 ]
                             ]
                         , div [ class "section-inner-content" ]
@@ -182,20 +185,43 @@ view model =
 
 {-| competitionInfo
 -}
-competitiveInfo : UserState -> String
+competitiveInfo : UserState -> Html msg
 competitiveInfo state =
     case state of
         Init ->
-            ""
+            div [] [ text "" ]
 
         Waiting ->
-            "Waiting..."
+            div [] [ text "Waiting..." ]
 
         Loaded user ->
-            String.fromInt user.rating
+            div []
+                [ div [] [ span [] [ text "Color : " ], span [ style "color" user.color ] [ text (ratingColor user.rating) ] ]
+                , div [] [ span [] [ text "Rating : " ], span [ style "color" user.color ] [ text (String.fromInt user.rating) ] ]
+                ]
 
         Failed error ->
-            Debug.toString error
+            div [] [ text (Debug.toString error) ]
+
+
+{-| competitionInfo
+-}
+ratingColor : Int -> String
+ratingColor rate =
+    if rate < 400 then
+        "Gray"
+
+    else if rate < 800 then
+        "Brown"
+
+    else if rate < 1200 then
+        "Green"
+
+    else if rate < 1600 then
+        "Light Blue"
+
+    else
+        "None"
 
 
 {-| navigation

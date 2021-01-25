@@ -6211,22 +6211,102 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			$elm$json$Json$Encode$string(string));
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $author$project$Main$ratingColor = function (rate) {
+	return (rate < 400) ? 'Gray' : ((rate < 800) ? 'Brown' : ((rate < 1200) ? 'Green' : ((rate < 1600) ? 'Light Blue' : 'None')));
+};
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$core$Debug$toString = _Debug_toString;
 var $author$project$Main$competitiveInfo = function (state) {
 	switch (state.$) {
 		case 'Init':
-			return '';
+			return A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('')
+					]));
 		case 'Waiting':
-			return 'Waiting...';
+			return A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Waiting...')
+					]));
 		case 'Loaded':
 			var user = state.a;
-			return $elm$core$String$fromInt(user.rating);
+			return A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$span,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Color : ')
+									])),
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'color', user.color)
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(
+										$author$project$Main$ratingColor(user.rating))
+									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$span,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Rating : ')
+									])),
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'color', user.color)
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(
+										$elm$core$String$fromInt(user.rating))
+									]))
+							]))
+					]));
 		default:
 			var error = state.a;
-			return $elm$core$Debug$toString(error);
+			return A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$Debug$toString(error))
+					]));
 	}
 };
-var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$header = _VirtualDom_node('header');
@@ -6267,7 +6347,6 @@ var $author$project$Main$displayName = function (sectionType) {
 			return 'CONTACT';
 	}
 };
-var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Main$iconItem = function (icon) {
 	return A2(
 		$elm$html$Html$span,
@@ -6291,8 +6370,6 @@ var $author$project$Main$sectionId = function (sectionType) {
 			return 'contact-section';
 	}
 };
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$linkItem = function (sectionType) {
 	return A2(
 		$elm$html$Html$li,
@@ -6774,16 +6851,41 @@ var $author$project$Main$view = function (model) {
 																		_List_Nil,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$text('AtCoder')
-																			]))
-																	])),
-																A2(
-																$elm$html$Html$div,
-																_List_Nil,
-																_List_fromArray(
-																	[
-																		$elm$html$Html$text(
-																		$author$project$Main$competitiveInfo(model.userState))
+																				A2(
+																				$elm$html$Html$a,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$Attributes$href('https://atcoder.jp/')
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('AtCoder')
+																					]))
+																			])),
+																		A2(
+																		$elm$html$Html$div,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				A2(
+																				$elm$html$Html$span,
+																				_List_Nil,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('Name : ')
+																					])),
+																				A2(
+																				$elm$html$Html$a,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$Attributes$href('https://atcoder.jp/users/aochan')
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('aochan')
+																					]))
+																			])),
+																		$author$project$Main$competitiveInfo(model.userState)
 																	]))
 															]))
 													])),
