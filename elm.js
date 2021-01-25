@@ -5322,10 +5322,10 @@ var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Main$Model = function (userState) {
 	return {userState: userState};
 };
+var $author$project$Main$Waiting = {$: 'Waiting'};
 var $author$project$Main$Receive = function (a) {
 	return {$: 'Receive', a: a};
 };
-var $author$project$Main$Waiting = {$: 'Waiting'};
 var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -6143,14 +6143,15 @@ var $author$project$Main$userDecoder = A4(
 		_List_fromArray(
 			['atcoder', 'status']),
 		$elm$json$Json$Decode$string));
+var $author$project$Main$send = $elm$http$Http$get(
+	{
+		expect: A2($elm$http$Http$expectJson, $author$project$Main$Receive, $author$project$Main$userDecoder),
+		url: 'https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan'
+	});
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
 		$author$project$Main$Model($author$project$Main$Waiting),
-		$elm$http$Http$get(
-			{
-				expect: A2($elm$http$Http$expectJson, $author$project$Main$Receive, $author$project$Main$userDecoder),
-				url: 'https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan'
-			}));
+		$author$project$Main$send);
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
@@ -6169,11 +6170,7 @@ var $author$project$Main$update = F2(
 				_Utils_update(
 					model,
 					{userState: $author$project$Main$Waiting}),
-				$elm$http$Http$get(
-					{
-						expect: A2($elm$http$Http$expectJson, $author$project$Main$Receive, $author$project$Main$userDecoder),
-						url: 'https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan'
-					}));
+				$author$project$Main$send);
 		} else {
 			if (msg.a.$ === 'Ok') {
 				var user = msg.a.a;

@@ -37,10 +37,7 @@ type UserState
 init : () -> ( Model, Cmd Msg )
 init _ =
     ( Model Waiting
-    , Http.get
-        { url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
-        , expect = Http.expectJson Receive userDecoder
-        }
+    , send
     )
 
 
@@ -60,10 +57,7 @@ update msg model =
             ( { model
                 | userState = Waiting
               }
-            , Http.get
-                { url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
-                , expect = Http.expectJson Receive userDecoder
-                }
+            , send
             )
 
         Receive (Ok user) ->
@@ -71,6 +65,14 @@ update msg model =
 
         Receive (Err e) ->
             ( { model | userState = Failed e }, Cmd.none )
+
+
+send : Cmd Msg
+send =
+    Http.get
+        { url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
+        , expect = Http.expectJson Receive userDecoder
+        }
 
 
 
