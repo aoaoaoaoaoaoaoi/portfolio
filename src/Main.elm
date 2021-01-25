@@ -1,11 +1,68 @@
 module Main exposing (main)
 
+import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Http
+import Json.Decode as D exposing (Decoder)
 
+main : Program () Model Msg
+main = 
+  Browser.element
+    {
+        init = init
+        , view = view
+        , update = update
+        , subscriptions = \_ -> Sub.none
+    }
 
-main : Html msg
-main =
+-- MODEL
+type alias Model =
+  {
+      userState : UserState
+  }
+
+type UserState
+  = Init
+  | Waiting
+  | Loaded User
+  | Failed Http.Error
+
+init : () -> (Model, Cmd Msg)
+init _=
+  (
+      Model Init
+      , Cmd.none
+  )
+
+-- UPDATE
+type Msg
+  = Send
+  | Receive (Result Http.Error User)
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  case msg of
+    Send ->
+        (
+            {
+                model | userState = Waiting
+            }, Http.get
+            {
+                url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
+                , expect = Http.expectJson Receive userDecoder
+            }
+        ) 
+
+    Receive (Ok user) -> 
+      ({model | userState = Loaded user}, Cmd.none)
+    Receive (Err e) ->
+      ({model | userState = Failed e}, Cmd.none)
+
+--VIEW
+view : Model -> Html msg
+view model =
     div []
         [ header []
             [ h1 [ class "title" ]
@@ -200,3 +257,18 @@ sectionId sectionType =
 
         Contact ->
             "contact-section"
+
+--DATA
+type alias User =
+    {
+        color : String
+        , rating : Int
+        , status : String
+    }
+
+userDecoder : Decoder User
+userDecoder =
+  D.map3 User
+  (D.at ["atcoder", "color"] D.string) 
+  (D.at ["atcoder", "rating"] D.int) 
+  (D.at ["atcoder", "status"] D.string) 
