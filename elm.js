@@ -6304,9 +6304,7 @@ var $author$project$Main$competitiveInfo = function (state) {
 					]));
 	}
 };
-var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
-var $elm$html$Html$header = _VirtualDom_node('header');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -6414,8 +6412,17 @@ var $author$project$Main$sectionHeader = function (sectionType) {
 					[
 						$author$project$Main$iconItem(
 						$author$project$Main$displayIcon(sectionType)),
-						$elm$html$Html$text(
-						$author$project$Main$displayName(sectionType))
+						A2(
+						$elm$html$Html$span,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('section-heading-text')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(
+								$author$project$Main$displayName(sectionType))
+							]))
 					]))
 			]));
 };
@@ -6432,22 +6439,6 @@ var $author$project$Main$view = function (model) {
 		_List_Nil,
 		_List_fromArray(
 			[
-				A2(
-				$elm$html$Html$header,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$h1,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('title')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('ao\'s portfolio')
-							]))
-					])),
 				A2(
 				$elm$html$Html$nav,
 				_List_fromArray(

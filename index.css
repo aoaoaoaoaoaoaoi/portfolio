@@ -5,6 +5,10 @@ body{
     font-family: Arial;
 }
 
+a{
+    text-decoration: none;
+}
+
 /*header*/
 header{
     height: 200px;
@@ -89,6 +93,16 @@ header{
 .section-heading{
     text-align: center;
 }
+
+.section-heading-text{
+    margin-left: 12px;
+}
+
+/*.heading-primary{
+    width: 80%;
+    display:flex;
+    margin: 0 auto;
+}*/
 
 .section-content{
     width: 80%;  
