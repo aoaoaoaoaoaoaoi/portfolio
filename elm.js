@@ -5319,24 +5319,8 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Main$Init = {$: 'Init'};
 var $author$project$Main$Model = function (userState) {
 	return {userState: userState};
-};
-var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Main$init = function (_v0) {
-	return _Utils_Tuple2(
-		$author$project$Main$Model($author$project$Main$Init),
-		$elm$core$Platform$Cmd$none);
-};
-var $elm$core$Platform$Sub$batch = _Platform_batch;
-var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$Main$Failed = function (a) {
-	return {$: 'Failed', a: a};
-};
-var $author$project$Main$Loaded = function (a) {
-	return {$: 'Loaded', a: a};
 };
 var $author$project$Main$Receive = function (a) {
 	return {$: 'Receive', a: a};
@@ -6159,6 +6143,25 @@ var $author$project$Main$userDecoder = A4(
 		_List_fromArray(
 			['atcoder', 'status']),
 		$elm$json$Json$Decode$string));
+var $author$project$Main$init = function (_v0) {
+	return _Utils_Tuple2(
+		$author$project$Main$Model($author$project$Main$Waiting),
+		$elm$http$Http$get(
+			{
+				expect: A2($elm$http$Http$expectJson, $author$project$Main$Receive, $author$project$Main$userDecoder),
+				url: 'https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan'
+			}));
+};
+var $elm$core$Platform$Sub$batch = _Platform_batch;
+var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
+var $author$project$Main$Failed = function (a) {
+	return {$: 'Failed', a: a};
+};
+var $author$project$Main$Loaded = function (a) {
+	return {$: 'Loaded', a: a};
+};
+var $elm$core$Platform$Cmd$batch = _Platform_batch;
+var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		if (msg.$ === 'Send') {
@@ -6208,6 +6211,21 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			$elm$json$Json$Encode$string(string));
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$core$Debug$toString = _Debug_toString;
+var $author$project$Main$competitiveInfo = function (state) {
+	switch (state.$) {
+		case 'Init':
+			return '';
+		case 'Waiting':
+			return 'Waiting...';
+		case 'Loaded':
+			var user = state.a;
+			return $elm$core$String$fromInt(user.rating);
+		default:
+			var error = state.a;
+			return $elm$core$Debug$toString(error);
+	}
+};
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
@@ -6736,6 +6754,36 @@ var $author$project$Main$view = function (model) {
 																_List_fromArray(
 																	[
 																		$elm$html$Html$text('Participation in competitive programming')
+																	]))
+															])),
+														A2(
+														$elm$html$Html$div,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$class('section-inner-content-content')
+															]),
+														_List_fromArray(
+															[
+																A2(
+																$elm$html$Html$ul,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('AtCoder')
+																			]))
+																	])),
+																A2(
+																$elm$html$Html$div,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text(
+																		$author$project$Main$competitiveInfo(model.userState))
 																	]))
 															]))
 													])),

@@ -7,60 +7,76 @@ import Html.Events exposing (..)
 import Http
 import Json.Decode as D exposing (Decoder)
 
+
 main : Program () Model Msg
-main = 
-  Browser.element
-    {
-        init = init
+main =
+    Browser.element
+        { init = init
         , view = view
         , update = update
         , subscriptions = \_ -> Sub.none
-    }
+        }
+
+
 
 -- MODEL
+
+
 type alias Model =
-  {
-      userState : UserState
-  }
+    { userState : UserState
+    }
+
 
 type UserState
-  = Init
-  | Waiting
-  | Loaded User
-  | Failed Http.Error
+    = Init
+    | Waiting
+    | Loaded User
+    | Failed Http.Error
 
-init : () -> (Model, Cmd Msg)
-init _=
-  (
-      Model Init
-      , Cmd.none
-  )
+
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( Model Waiting
+    , Http.get
+        { url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
+        , expect = Http.expectJson Receive userDecoder
+        }
+    )
+
+
 
 -- UPDATE
+
+
 type Msg
-  = Send
-  | Receive (Result Http.Error User)
+    = Send
+    | Receive (Result Http.Error User)
 
-update : Msg -> Model -> (Model, Cmd Msg)
+
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    Send ->
-        (
-            {
-                model | userState = Waiting
-            }, Http.get
-            {
-                url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
+    case msg of
+        Send ->
+            ( { model
+                | userState = Waiting
+              }
+            , Http.get
+                { url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
                 , expect = Http.expectJson Receive userDecoder
-            }
-        ) 
+                }
+            )
 
-    Receive (Ok user) -> 
-      ({model | userState = Loaded user}, Cmd.none)
-    Receive (Err e) ->
-      ({model | userState = Failed e}, Cmd.none)
+        Receive (Ok user) ->
+            ( { model | userState = Loaded user }, Cmd.none )
+
+        Receive (Err e) ->
+            ( { model | userState = Failed e }, Cmd.none )
+
+
 
 --VIEW
+
+
 view : Model -> Html msg
 view model =
     div []
@@ -142,6 +158,10 @@ view model =
                             [ div [ class "section-inner-content-heading" ]
                                 [ h3 [] [ text "Participation in competitive programming" ]
                                 ]
+                            , div [ class "section-inner-content-content" ]
+                                [ ul [] [ li [] [ text "AtCoder" ] ]
+                                , div [] [ text (competitiveInfo model.userState) ]
+                                ]
                             ]
                         , div [ class "section-inner-content" ]
                             [ div [ class "section-inner-content-heading" ]
@@ -158,6 +178,24 @@ view model =
                 ]
             ]
         ]
+
+
+{-| competitionInfo
+-}
+competitiveInfo : UserState -> String
+competitiveInfo state =
+    case state of
+        Init ->
+            ""
+
+        Waiting ->
+            "Waiting..."
+
+        Loaded user ->
+            String.fromInt user.rating
+
+        Failed error ->
+            Debug.toString error
 
 
 {-| navigation
@@ -258,17 +296,21 @@ sectionId sectionType =
         Contact ->
             "contact-section"
 
+
+
 --DATA
+
+
 type alias User =
-    {
-        color : String
-        , rating : Int
-        , status : String
+    { color : String
+    , rating : Int
+    , status : String
     }
+
 
 userDecoder : Decoder User
 userDecoder =
-  D.map3 User
-  (D.at ["atcoder", "color"] D.string) 
-  (D.at ["atcoder", "rating"] D.int) 
-  (D.at ["atcoder", "status"] D.string) 
+    D.map3 User
+        (D.at [ "atcoder", "color" ] D.string)
+        (D.at [ "atcoder", "rating" ] D.int)
+        (D.at [ "atcoder", "status" ] D.string)
