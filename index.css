@@ -3,6 +3,9 @@ body{
     background-color: #0d1117;
     color : #c9d1d9;
     font-family: Arial;
+
+    /*position*/
+    margin: 4.25rem 0 0;
 }
 
 a{
@@ -30,6 +33,13 @@ header{
 /*navigation*/
 .gnav{
     font-family: 'Open sans', sans-serif;
+    background-color: #161b22;
+
+    /*position, 上に固定*/
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
 }
 
 .gnav-list{
@@ -82,30 +92,30 @@ header{
 }
 
 .content{
-    margin-top: 40px;
+    padding: 1.5rem;
+    width: 70%;
+    margin: 0 auto;
 }
 
 /*body*/
-.section{
-    padding: 60px;
+section{
+    padding: 20px;
 }
 
-.section-heading{
-    text-align: center;
+h2:after{
+    display: table;
+    width: 100%;
+    content: " ";
+    margin-top: -1px;
+    border-bottom: 1px dashed;
 }
 
 .section-heading-text{
     margin-left: 12px;
 }
 
-/*.heading-primary{
-    width: 80%;
-    display:flex;
-    margin: 0 auto;
-}*/
-
 .section-content{
-    width: 80%;  
+    width: 95%;  
     margin: 0 auto;
 }
 
@@ -120,7 +130,7 @@ header{
 }
 
 .two-column-left{
-  width: 33%;
+  width: 20%;
   text-align: center;
 }
 

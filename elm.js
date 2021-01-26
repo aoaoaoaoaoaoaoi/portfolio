@@ -6685,7 +6685,7 @@ var $author$project$Main$view = function (model) {
 																_List_Nil,
 																_List_fromArray(
 																	[
-																		$elm$html$Html$text('Reading technical books')
+																		$elm$html$Html$text('# Reading technical books')
 																	]))
 															])),
 														A2(
@@ -6732,7 +6732,7 @@ var $author$project$Main$view = function (model) {
 																_List_Nil,
 																_List_fromArray(
 																	[
-																		$elm$html$Html$text('Writing technical articles')
+																		$elm$html$Html$text('# Writing technical articles')
 																	]))
 															])),
 														A2(
@@ -6818,7 +6818,7 @@ var $author$project$Main$view = function (model) {
 																_List_Nil,
 																_List_fromArray(
 																	[
-																		$elm$html$Html$text('Participation in competitive programming')
+																		$elm$html$Html$text('# Participation in competitive programming')
 																	]))
 															])),
 														A2(
@@ -6898,7 +6898,7 @@ var $author$project$Main$view = function (model) {
 																_List_Nil,
 																_List_fromArray(
 																	[
-																		$elm$html$Html$text('Creating in free time')
+																		$elm$html$Html$text('# Creating in free time')
 																	]))
 															]))
 													])),
@@ -6923,7 +6923,7 @@ var $author$project$Main$view = function (model) {
 																_List_Nil,
 																_List_fromArray(
 																	[
-																		$elm$html$Html$text('Creating Games')
+																		$elm$html$Html$text('# Creating Games')
 																	]))
 															]))
 													]))
