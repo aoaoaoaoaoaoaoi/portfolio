@@ -1,4 +1,5 @@
 /*all*/
+
 body{
     background-color: #0d1117;
     color : #c9d1d9;
@@ -6,10 +7,6 @@ body{
 
     /*position*/
     margin: 4.25rem 0 0;
-}
-
-a{
-    text-decoration: none;
 }
 
 /*header*/
@@ -63,6 +60,16 @@ header{
 
 .gnav li a{
     margin-left: 12px;
+    text-decoration: none;
+}
+
+.gnav li a:visited{
+    color: #8b949e;
+}
+
+.gnav li a:hover{
+    color: #c9d1d9;
+    border-bottom-color: #6e7681;
 }
 
 /*icon*/
@@ -91,15 +98,19 @@ header{
     content: "\e87d";
 }
 
+/*body*/
 .content{
     padding: 1.5rem;
     width: 70%;
     margin: 0 auto;
 }
 
-/*body*/
 section{
     padding: 20px;
+}
+
+section a{
+    color: #58a6ff;
 }
 
 h2:after{
