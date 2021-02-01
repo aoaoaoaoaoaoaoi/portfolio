@@ -82,11 +82,7 @@ send =
 view : Model -> Html msg
 view model =
     div []
-        [ {-header []
-            [ h1 [ class "title" ]
-                [ text "ao's portfolio" ]
-            ]
-        ,-} nav [ class "gnav" ]
+        [ nav [ class "gnav" ]
             [ ul [ class "gnav-list" ]
                 [ linkItem Profile
                 , linkItem Career
