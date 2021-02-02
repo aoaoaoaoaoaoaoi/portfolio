@@ -30,7 +30,7 @@ type alias Model =
 type UserState
     = Init
     | Waiting
-    | Loaded User
+    | Loaded CompetitiveUser
     | Failed Http.Error
 
 
@@ -47,7 +47,7 @@ init _ =
 
 type Msg
     = Send
-    | Receive (Result Http.Error User)
+    | Receive (Result Http.Error CompetitiveUser)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -57,22 +57,68 @@ update msg model =
             ( { model
                 | userState = Waiting
               }
-            , send
+            , getCompetitiveData
             )
 
-        Receive (Ok user) ->
-            ( { model | userState = Loaded user }, Cmd.none )
+        Receive (Ok competitiveUser) ->
+            ( { model | userState = Loaded competitiveUser }, Cmd.none )
 
         Receive (Err e) ->
             ( { model | userState = Failed e }, Cmd.none )
 
 
-send : Cmd Msg
-send =
-    Http.get
-        { url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
-        , expect = Http.expectJson Receive userDecoder
+
+{-
+   send : Cmd Msg
+   send =
+       Http.get
+           { url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
+           , expect = Http.expectJson Receive competitiveUserDecoder
+           }
+-}
+
+
+getCompetitiveData : Cmd Msg
+getCompetitiveData =
+    Task.attemp Receive getCompetitiveDataTask
+
+
+getCompetitiveDataTask : Task Http.Error Response
+getCompetitiveDataTask =
+    Http.task
+        { method = "GET"
+        , headers = []
+        , url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
+        , body = Http.emptyBody
+        , resolver = jsonResolver competitiveUserDecoder
+        , timeout = Nothing
         }
+
+
+jsonResolver : Decode.Decoder a -> Http.Resolver Http.Error a
+jsonResolver decoder =
+    Http.stringResolver <|
+        \response ->
+            case response of
+                Http.BadUrl_ url ->
+                    Err (Http.BadUrl url)
+
+                Http.Timeout_ ->
+                    Err Http.Timeout
+
+                Http.NetworkError_ ->
+                    Err Http.NetworkError
+
+                Http.BadStatus_ metadata body ->
+                    Err (Http.BadStatus metadata.statusCode)
+
+                Http.GoodStatus_ metadata body ->
+                    case Decode.decodeString decoder body of
+                        Ok value ->
+                            Ok value
+
+                        Err err ->
+                            Err (Http.BadBody (Decode.errorToString err))
 
 
 
@@ -192,10 +238,10 @@ competitiveInfo state =
         Waiting ->
             div [] [ text "Waiting..." ]
 
-        Loaded user ->
+        Loaded competitiveUser ->
             div []
-                [ div [] [ span [] [ text "Color : " ], span [ style "color" user.color ] [ text (ratingColor user.rating) ] ]
-                , div [] [ span [] [ text "Rating : " ], span [ style "color" user.color ] [ text (String.fromInt user.rating) ] ]
+                [ div [] [ span [] [ text "Color : " ], span [ style "color" competitiveUser.color ] [ text (ratingColor competitiveUser.rating) ] ]
+                , div [] [ span [] [ text "Rating : " ], span [ style "color" competitiveUser.color ] [ text (String.fromInt competitiveUser.rating) ] ]
                 ]
 
         Failed error ->
@@ -325,16 +371,33 @@ sectionId sectionType =
 --DATA
 
 
-type alias User =
+type alias CompetitiveUser =
     { color : String
     , rating : Int
     , status : String
     }
 
 
-userDecoder : Decoder User
-userDecoder =
-    D.map3 User
+competitiveUserDecoder : Decoder CompetitiveUser
+competitiveUserDecoder =
+    D.map3 CompetitiveUser
+        (D.at [ "atcoder", "color" ] D.string)
+        (D.at [ "atcoder", "rating" ] D.int)
+        (D.at [ "atcoder", "status" ] D.string)
+
+
+type alias Repository =
+    { name : String
+    , private : Bool
+    , description : Int
+    , folk : Bool
+    , url : String
+    }
+
+
+repositoryDecoder : Decoder CompetitiveUser
+repositoryDecoder =
+    D.map3 CompetitiveUser
         (D.at [ "atcoder", "color" ] D.string)
         (D.at [ "atcoder", "rating" ] D.int)
         (D.at [ "atcoder", "status" ] D.string)
