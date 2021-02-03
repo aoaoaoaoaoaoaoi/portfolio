@@ -379,15 +379,22 @@ competitiveUserDecoder =
 type alias Repository =
     { name : String
     , private : Bool
-    , description : Int
+    , description : String
     , folk : Bool
     , url : String
     }
 
 
-repositoryDecoder : Decoder CompetitiveUser
+repositoriesDecoder : Decoder (List Repository)
+repositoriesDecoder =
+    list repositoryDecoder
+
+
+repositoryDecoder : Decoder Repository
 repositoryDecoder =
-    D.map3 CompetitiveUser
-        (D.at [ "atcoder", "color" ] D.string)
-        (D.at [ "atcoder", "rating" ] D.int)
-        (D.at [ "atcoder", "status" ] D.string)
+    D.map5 Repository
+        (D.field "name" D.string)
+        (D.field "private" D.bool)
+        (D.field "description" D.string)
+        (D.field "folk" D.bool)
+        (D.field "url" D.string)
