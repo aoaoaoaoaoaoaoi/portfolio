@@ -6,6 +6,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
 import Json.Decode as D exposing (Decoder)
+import Task exposing (..)
 
 
 main : Program () Model Msg
@@ -37,7 +38,7 @@ type UserState
 init : () -> ( Model, Cmd Msg )
 init _ =
     ( Model Waiting
-    , send
+    , getCompetitiveData
     )
 
 
@@ -67,23 +68,12 @@ update msg model =
             ( { model | userState = Failed e }, Cmd.none )
 
 
-
-{-
-   send : Cmd Msg
-   send =
-       Http.get
-           { url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
-           , expect = Http.expectJson Receive competitiveUserDecoder
-           }
--}
-
-
 getCompetitiveData : Cmd Msg
 getCompetitiveData =
-    Task.attemp Receive getCompetitiveDataTask
+    Task.attempt Receive getCompetitiveDataTask
 
 
-getCompetitiveDataTask : Task Http.Error Response
+getCompetitiveDataTask : Task Http.Error CompetitiveUser
 getCompetitiveDataTask =
     Http.task
         { method = "GET"
@@ -95,7 +85,7 @@ getCompetitiveDataTask =
         }
 
 
-jsonResolver : Decode.Decoder a -> Http.Resolver Http.Error a
+jsonResolver : D.Decoder a -> Http.Resolver Http.Error a
 jsonResolver decoder =
     Http.stringResolver <|
         \response ->
@@ -113,12 +103,12 @@ jsonResolver decoder =
                     Err (Http.BadStatus metadata.statusCode)
 
                 Http.GoodStatus_ metadata body ->
-                    case Decode.decodeString decoder body of
+                    case D.decodeString decoder body of
                         Ok value ->
                             Ok value
 
                         Err err ->
-                            Err (Http.BadBody (Decode.errorToString err))
+                            Err (Http.BadBody (D.errorToString err))
 
 
 
