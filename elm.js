@@ -5319,12 +5319,14 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Main$Model = function (userState) {
-	return {userState: userState};
-};
+var $author$project$Main$Model = F2(
+	function (competitiveDataState, repositoryDataState) {
+		return {competitiveDataState: competitiveDataState, repositoryDataState: repositoryDataState};
+	});
 var $author$project$Main$Waiting = {$: 'Waiting'};
-var $author$project$Main$Receive = function (a) {
-	return {$: 'Receive', a: a};
+var $elm$core$Platform$Cmd$batch = _Platform_batch;
+var $author$project$Main$ReceiveCompetitiveData = function (a) {
+	return {$: 'ReceiveCompetitiveData', a: a};
 };
 var $elm$core$Basics$composeL = F3(
 	function (g, f, x) {
@@ -5995,50 +5997,106 @@ var $author$project$Main$getCompetitiveDataTask = $elm$http$Http$task(
 		timeout: $elm$core$Maybe$Nothing,
 		url: 'https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan'
 	});
-var $author$project$Main$getCompetitiveData = A2($elm$core$Task$attempt, $author$project$Main$Receive, $author$project$Main$getCompetitiveDataTask);
+var $author$project$Main$getCompetitiveData = A2($elm$core$Task$attempt, $author$project$Main$ReceiveCompetitiveData, $author$project$Main$getCompetitiveDataTask);
+var $author$project$Main$ReceiveRepositoryData = function (a) {
+	return {$: 'ReceiveRepositoryData', a: a};
+};
+var $elm$json$Json$Decode$list = _Json_decodeList;
+var $author$project$Main$Repository = F5(
+	function (name, _private, description, folk, url) {
+		return {description: description, folk: folk, name: name, _private: _private, url: url};
+	});
+var $elm$json$Json$Decode$bool = _Json_decodeBool;
+var $elm$json$Json$Decode$map5 = _Json_map5;
+var $author$project$Main$repositoryDecoder = A6(
+	$elm$json$Json$Decode$map5,
+	$author$project$Main$Repository,
+	A2($elm$json$Json$Decode$field, 'name', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'private', $elm$json$Json$Decode$bool),
+	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'folk', $elm$json$Json$Decode$bool),
+	A2($elm$json$Json$Decode$field, 'url', $elm$json$Json$Decode$string));
+var $author$project$Main$repositoriesDecoder = $elm$json$Json$Decode$list($author$project$Main$repositoryDecoder);
+var $author$project$Main$getRepositoryDataTask = $elm$http$Http$task(
+	{
+		body: $elm$http$Http$emptyBody,
+		headers: _List_Nil,
+		method: 'GET',
+		resolver: $author$project$Main$jsonResolver($author$project$Main$repositoriesDecoder),
+		timeout: $elm$core$Maybe$Nothing,
+		url: 'https://api.github.com/users/aoaoaoaoaoaoaoi/repos'
+	});
+var $author$project$Main$getRepositoryData = A2($elm$core$Task$attempt, $author$project$Main$ReceiveRepositoryData, $author$project$Main$getRepositoryDataTask);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		$author$project$Main$Model($author$project$Main$Waiting),
-		$author$project$Main$getCompetitiveData);
+		A2($author$project$Main$Model, $author$project$Main$Waiting, $author$project$Main$Waiting),
+		$elm$core$Platform$Cmd$batch(
+			_List_fromArray(
+				[$author$project$Main$getCompetitiveData, $author$project$Main$getRepositoryData])));
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Main$Failed = function (a) {
 	return {$: 'Failed', a: a};
 };
-var $author$project$Main$Loaded = function (a) {
-	return {$: 'Loaded', a: a};
+var $author$project$Main$LoadedCompetitiveData = function (a) {
+	return {$: 'LoadedCompetitiveData', a: a};
 };
-var $elm$core$Platform$Cmd$batch = _Platform_batch;
+var $author$project$Main$LoadedRepositoryData = function (a) {
+	return {$: 'LoadedRepositoryData', a: a};
+};
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'Send') {
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{userState: $author$project$Main$Waiting}),
-				$author$project$Main$getCompetitiveData);
-		} else {
-			if (msg.a.$ === 'Ok') {
-				var competitiveUser = msg.a.a;
+		switch (msg.$) {
+			case 'Send':
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{
-							userState: $author$project$Main$Loaded(competitiveUser)
-						}),
-					$elm$core$Platform$Cmd$none);
-			} else {
-				var e = msg.a.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							userState: $author$project$Main$Failed(e)
-						}),
-					$elm$core$Platform$Cmd$none);
-			}
+						{competitiveDataState: $author$project$Main$Waiting, repositoryDataState: $author$project$Main$Waiting}),
+					$elm$core$Platform$Cmd$batch(
+						_List_fromArray(
+							[$author$project$Main$getCompetitiveData, $author$project$Main$getRepositoryData])));
+			case 'ReceiveCompetitiveData':
+				if (msg.a.$ === 'Ok') {
+					var competitiveUser = msg.a.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								competitiveDataState: $author$project$Main$LoadedCompetitiveData(competitiveUser)
+							}),
+						$elm$core$Platform$Cmd$none);
+				} else {
+					var e = msg.a.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								competitiveDataState: $author$project$Main$Failed(e)
+							}),
+						$elm$core$Platform$Cmd$none);
+				}
+			default:
+				if (msg.a.$ === 'Ok') {
+					var repository = msg.a.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								repositoryDataState: $author$project$Main$LoadedRepositoryData(repository)
+							}),
+						$elm$core$Platform$Cmd$none);
+				} else {
+					var e = msg.a.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								repositoryDataState: $author$project$Main$Failed(e)
+							}),
+						$elm$core$Platform$Cmd$none);
+				}
 		}
 	});
 var $author$project$Main$Career = {$: 'Career'};
@@ -6084,7 +6142,7 @@ var $author$project$Main$competitiveInfo = function (state) {
 					[
 						$elm$html$Html$text('Waiting...')
 					]));
-		case 'Loaded':
+		case 'LoadedCompetitiveData':
 			var competitiveUser = state.a;
 			return A2(
 				$elm$html$Html$div,
@@ -6139,6 +6197,15 @@ var $author$project$Main$competitiveInfo = function (state) {
 										$elm$core$String$fromInt(competitiveUser.rating))
 									]))
 							]))
+					]));
+		case 'LoadedRepositoryData':
+			var repository = state.a;
+			return A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('')
 					]));
 		default:
 			var error = state.a;
@@ -6721,7 +6788,7 @@ var $author$project$Main$view = function (model) {
 																						$elm$html$Html$text('aochan')
 																					]))
 																			])),
-																		$author$project$Main$competitiveInfo(model.userState)
+																		$author$project$Main$competitiveInfo(model.competitiveDataState)
 																	]))
 															]))
 													])),

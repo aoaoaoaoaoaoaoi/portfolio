@@ -24,21 +24,23 @@ main =
 
 
 type alias Model =
-    { userState : UserState
+    { competitiveDataState : DataState
+    , repositoryDataState : DataState
     }
 
 
-type UserState
+type DataState
     = Init
     | Waiting
-    | Loaded CompetitiveUser
+    | LoadedCompetitiveData CompetitiveUser
+    | LoadedRepositoryData (List Repository)
     | Failed Http.Error
 
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Model Waiting
-    , getCompetitiveData
+    ( Model Waiting Waiting
+    , Cmd.batch [ getCompetitiveData, getRepositoryData ]
     )
 
 
@@ -48,7 +50,8 @@ init _ =
 
 type Msg
     = Send
-    | Receive (Result Http.Error CompetitiveUser)
+    | ReceiveCompetitiveData (Result Http.Error CompetitiveUser)
+    | ReceiveRepositoryData (Result Http.Error (List Repository))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -56,21 +59,28 @@ update msg model =
     case msg of
         Send ->
             ( { model
-                | userState = Waiting
+                | competitiveDataState = Waiting
+                , repositoryDataState = Waiting
               }
-            , getCompetitiveData
+            , Cmd.batch [ getCompetitiveData, getRepositoryData ]
             )
 
-        Receive (Ok competitiveUser) ->
-            ( { model | userState = Loaded competitiveUser }, Cmd.none )
+        ReceiveCompetitiveData (Ok competitiveUser) ->
+            ( { model | competitiveDataState = LoadedCompetitiveData competitiveUser }, Cmd.none )
 
-        Receive (Err e) ->
-            ( { model | userState = Failed e }, Cmd.none )
+        ReceiveCompetitiveData (Err e) ->
+            ( { model | competitiveDataState = Failed e }, Cmd.none )
+
+        ReceiveRepositoryData (Ok repository) ->
+            ( { model | repositoryDataState = LoadedRepositoryData repository }, Cmd.none )
+
+        ReceiveRepositoryData (Err e) ->
+            ( { model | repositoryDataState = Failed e }, Cmd.none )
 
 
 getCompetitiveData : Cmd Msg
 getCompetitiveData =
-    Task.attempt Receive getCompetitiveDataTask
+    Task.attempt ReceiveCompetitiveData getCompetitiveDataTask
 
 
 getCompetitiveDataTask : Task Http.Error CompetitiveUser
@@ -81,6 +91,23 @@ getCompetitiveDataTask =
         , url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
         , body = Http.emptyBody
         , resolver = jsonResolver competitiveUserDecoder
+        , timeout = Nothing
+        }
+
+
+getRepositoryData : Cmd Msg
+getRepositoryData =
+    Task.attempt ReceiveRepositoryData getRepositoryDataTask
+
+
+getRepositoryDataTask : Task Http.Error (List Repository)
+getRepositoryDataTask =
+    Http.task
+        { method = "GET"
+        , headers = []
+        , url = "https://api.github.com/users/aoaoaoaoaoaoaoi/repos"
+        , body = Http.emptyBody
+        , resolver = jsonResolver repositoriesDecoder
         , timeout = Nothing
         }
 
@@ -196,7 +223,7 @@ view model =
                                 [ ul []
                                     [ li [] [ a [ href "https://atcoder.jp/" ] [ text "AtCoder" ] ]
                                     , div [] [ span [] [ text "Name : " ], a [ href "https://atcoder.jp/users/aochan" ] [ text "aochan" ] ]
-                                    , competitiveInfo model.userState
+                                    , competitiveInfo model.competitiveDataState
                                     ]
                                 ]
                             ]
@@ -219,7 +246,7 @@ view model =
 
 {-| competitionInfo
 -}
-competitiveInfo : UserState -> Html msg
+competitiveInfo : DataState -> Html msg
 competitiveInfo state =
     case state of
         Init ->
@@ -228,11 +255,14 @@ competitiveInfo state =
         Waiting ->
             div [] [ text "Waiting..." ]
 
-        Loaded competitiveUser ->
+        LoadedCompetitiveData competitiveUser ->
             div []
                 [ div [] [ span [] [ text "Color : " ], span [ style "color" competitiveUser.color ] [ text (ratingColor competitiveUser.rating) ] ]
                 , div [] [ span [] [ text "Rating : " ], span [ style "color" competitiveUser.color ] [ text (String.fromInt competitiveUser.rating) ] ]
                 ]
+
+        LoadedRepositoryData (repository) ->
+            div [] [ text "" ]
 
         Failed error ->
             div [] [ text (Debug.toString error) ]
