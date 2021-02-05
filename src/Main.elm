@@ -6,6 +6,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
 import Json.Decode as D exposing (Decoder)
+import List exposing (..)
 import Task exposing (..)
 
 
@@ -231,6 +232,9 @@ view model =
                             [ div [ class "section-inner-content-heading" ]
                                 [ h3 [] [ text "# Creating in free time" ]
                                 ]
+                            , div []
+                                [ repositoryInfo model.repositoryDataState
+                                ]
                             ]
                         , div [ class "section-inner-content" ]
                             [ div [ class "section-inner-content-heading" ]
@@ -261,8 +265,34 @@ competitiveInfo state =
                 , div [] [ span [] [ text "Rating : " ], span [ style "color" competitiveUser.color ] [ text (String.fromInt competitiveUser.rating) ] ]
                 ]
 
-        LoadedRepositoryData (repository) ->
+        LoadedRepositoryData repository ->
             div [] [ text "" ]
+
+        Failed error ->
+            div [] [ text (Debug.toString error) ]
+
+
+{-| repositoryInfo
+-}
+repositoryInfo : DataState -> Html msg
+repositoryInfo state =
+    case state of
+        Init ->
+            div [] [ text "" ]
+
+        Waiting ->
+            div [] [ text "Waiting..." ]
+
+        LoadedCompetitiveData competitiveUser ->
+            div [] [ text "" ]
+
+        LoadedRepositoryData repositories ->
+            case head repositories of
+                Just value ->
+                    div [] [ text value.name ]
+
+                Nothing ->
+                    div [] [ text "" ]
 
         Failed error ->
             div [] [ text (Debug.toString error) ]

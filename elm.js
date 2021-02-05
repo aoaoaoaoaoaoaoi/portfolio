@@ -6306,6 +6306,75 @@ var $author$project$Main$linkItem = function (sectionType) {
 			]));
 };
 var $elm$html$Html$nav = _VirtualDom_node('nav');
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$Main$repositoryInfo = function (state) {
+	switch (state.$) {
+		case 'Init':
+			return A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('')
+					]));
+		case 'Waiting':
+			return A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Waiting...')
+					]));
+		case 'LoadedCompetitiveData':
+			var competitiveUser = state.a;
+			return A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('')
+					]));
+		case 'LoadedRepositoryData':
+			var repositories = state.a;
+			var _v1 = $elm$core$List$head(repositories);
+			if (_v1.$ === 'Just') {
+				var value = _v1.a;
+				return A2(
+					$elm$html$Html$div,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(value.name)
+						]));
+			} else {
+				return A2(
+					$elm$html$Html$div,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text('')
+						]));
+			}
+		default:
+			var error = state.a;
+			return A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$Debug$toString(error))
+					]));
+	}
+};
 var $elm$html$Html$section = _VirtualDom_node('section');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $author$project$Main$sectionHeader = function (sectionType) {
@@ -6815,6 +6884,13 @@ var $author$project$Main$view = function (model) {
 																	[
 																		$elm$html$Html$text('# Creating in free time')
 																	]))
+															])),
+														A2(
+														$elm$html$Html$div,
+														_List_Nil,
+														_List_fromArray(
+															[
+																$author$project$Main$repositoryInfo(model.repositoryDataState)
 															]))
 													])),
 												A2(
