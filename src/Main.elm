@@ -387,7 +387,7 @@ type alias Repository =
 
 repositoriesDecoder : Decoder (List Repository)
 repositoriesDecoder =
-    list repositoryDecoder
+    D.list repositoryDecoder
 
 
 repositoryDecoder : Decoder Repository
