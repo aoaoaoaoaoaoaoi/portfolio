@@ -5319,69 +5319,14 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Main$Model = F2(
-	function (competitiveDataState, repositoryDataState) {
-		return {competitiveDataState: competitiveDataState, repositoryDataState: repositoryDataState};
-	});
-var $author$project$Main$Waiting = {$: 'Waiting'};
-var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $author$project$Main$ReceiveCompetitiveData = function (a) {
-	return {$: 'ReceiveCompetitiveData', a: a};
+var $author$project$Main$Model = function (repositoryDataState) {
+	return {repositoryDataState: repositoryDataState};
 };
-var $elm$core$Basics$composeL = F3(
-	function (g, f, x) {
-		return g(
-			f(x));
-	});
-var $elm$core$Task$onError = _Scheduler_onError;
-var $elm$core$Task$attempt = F2(
-	function (resultToMessage, task) {
-		return $elm$core$Task$command(
-			$elm$core$Task$Perform(
-				A2(
-					$elm$core$Task$onError,
-					A2(
-						$elm$core$Basics$composeL,
-						A2($elm$core$Basics$composeL, $elm$core$Task$succeed, resultToMessage),
-						$elm$core$Result$Err),
-					A2(
-						$elm$core$Task$andThen,
-						A2(
-							$elm$core$Basics$composeL,
-							A2($elm$core$Basics$composeL, $elm$core$Task$succeed, resultToMessage),
-							$elm$core$Result$Ok),
-						task))));
-	});
-var $author$project$Main$CompetitiveUser = F3(
-	function (color, rating, status) {
-		return {color: color, rating: rating, status: status};
-	});
-var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
-	});
-var $elm$json$Json$Decode$int = _Json_decodeInt;
-var $elm$json$Json$Decode$map3 = _Json_map3;
-var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Main$competitiveUserDecoder = A4(
-	$elm$json$Json$Decode$map3,
-	$author$project$Main$CompetitiveUser,
-	A2(
-		$elm$json$Json$Decode$at,
-		_List_fromArray(
-			['atcoder', 'color']),
-		$elm$json$Json$Decode$string),
-	A2(
-		$elm$json$Json$Decode$at,
-		_List_fromArray(
-			['atcoder', 'rating']),
-		$elm$json$Json$Decode$int),
-	A2(
-		$elm$json$Json$Decode$at,
-		_List_fromArray(
-			['atcoder', 'status']),
-		$elm$json$Json$Decode$string));
+var $author$project$Main$ReceiveRepositoryData = function (a) {
+	return {$: 'ReceiveRepositoryData', a: a};
+};
+var $author$project$Main$Waiting = {$: 'Waiting'};
+var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
 		return {$: 'BadStatus_', a: a, b: b};
@@ -5924,7 +5869,30 @@ var $elm$core$Dict$update = F3(
 			return A2($elm$core$Dict$remove, targetKey, dictionary);
 		}
 	});
-var $elm$http$Http$emptyBody = _Http_emptyBody;
+var $elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
+var $elm$http$Http$expectStringResponse = F2(
+	function (toMsg, toResult) {
+		return A3(
+			_Http_expect,
+			'',
+			$elm$core$Basics$identity,
+			A2($elm$core$Basics$composeR, toResult, toMsg));
+	});
+var $elm$core$Result$mapError = F2(
+	function (f, result) {
+		if (result.$ === 'Ok') {
+			var v = result.a;
+			return $elm$core$Result$Ok(v);
+		} else {
+			var e = result.a;
+			return $elm$core$Result$Err(
+				f(e));
+		}
+	});
 var $elm$http$Http$BadBody = function (a) {
 	return {$: 'BadBody', a: a};
 };
@@ -5936,167 +5904,283 @@ var $elm$http$Http$BadUrl = function (a) {
 };
 var $elm$http$Http$NetworkError = {$: 'NetworkError'};
 var $elm$http$Http$Timeout = {$: 'Timeout'};
-var $elm$json$Json$Decode$decodeString = _Json_runOnString;
-var $elm$http$Http$stringResolver = A2(_Http_expect, '', $elm$core$Basics$identity);
-var $author$project$Main$jsonResolver = function (decoder) {
-	return $elm$http$Http$stringResolver(
-		function (response) {
-			switch (response.$) {
-				case 'BadUrl_':
-					var url = response.a;
-					return $elm$core$Result$Err(
-						$elm$http$Http$BadUrl(url));
-				case 'Timeout_':
-					return $elm$core$Result$Err($elm$http$Http$Timeout);
-				case 'NetworkError_':
-					return $elm$core$Result$Err($elm$http$Http$NetworkError);
-				case 'BadStatus_':
-					var metadata = response.a;
-					var body = response.b;
-					return $elm$core$Result$Err(
-						$elm$http$Http$BadStatus(metadata.statusCode));
-				default:
-					var metadata = response.a;
-					var body = response.b;
-					var _v1 = A2($elm$json$Json$Decode$decodeString, decoder, body);
-					if (_v1.$ === 'Ok') {
-						var value = _v1.a;
-						return $elm$core$Result$Ok(value);
-					} else {
-						var err = _v1.a;
-						return $elm$core$Result$Err(
-							$elm$http$Http$BadBody(
-								$elm$json$Json$Decode$errorToString(err)));
-					}
-			}
-		});
-};
-var $elm$core$Task$fail = _Scheduler_fail;
-var $elm$http$Http$resultToTask = function (result) {
-	if (result.$ === 'Ok') {
-		var a = result.a;
-		return $elm$core$Task$succeed(a);
-	} else {
-		var x = result.a;
-		return $elm$core$Task$fail(x);
-	}
-};
-var $elm$http$Http$task = function (r) {
-	return A3(
-		_Http_toTask,
-		_Utils_Tuple0,
-		$elm$http$Http$resultToTask,
-		{allowCookiesFromOtherDomains: false, body: r.body, expect: r.resolver, headers: r.headers, method: r.method, timeout: r.timeout, tracker: $elm$core$Maybe$Nothing, url: r.url});
-};
-var $author$project$Main$getCompetitiveDataTask = $elm$http$Http$task(
-	{
-		body: $elm$http$Http$emptyBody,
-		headers: _List_Nil,
-		method: 'GET',
-		resolver: $author$project$Main$jsonResolver($author$project$Main$competitiveUserDecoder),
-		timeout: $elm$core$Maybe$Nothing,
-		url: 'https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan'
+var $elm$http$Http$resolve = F2(
+	function (toResult, response) {
+		switch (response.$) {
+			case 'BadUrl_':
+				var url = response.a;
+				return $elm$core$Result$Err(
+					$elm$http$Http$BadUrl(url));
+			case 'Timeout_':
+				return $elm$core$Result$Err($elm$http$Http$Timeout);
+			case 'NetworkError_':
+				return $elm$core$Result$Err($elm$http$Http$NetworkError);
+			case 'BadStatus_':
+				var metadata = response.a;
+				return $elm$core$Result$Err(
+					$elm$http$Http$BadStatus(metadata.statusCode));
+			default:
+				var body = response.b;
+				return A2(
+					$elm$core$Result$mapError,
+					$elm$http$Http$BadBody,
+					toResult(body));
+		}
 	});
-var $author$project$Main$getCompetitiveData = A2($elm$core$Task$attempt, $author$project$Main$ReceiveCompetitiveData, $author$project$Main$getCompetitiveDataTask);
-var $author$project$Main$ReceiveRepositoryData = function (a) {
-	return {$: 'ReceiveRepositoryData', a: a};
+var $elm$http$Http$expectJson = F2(
+	function (toMsg, decoder) {
+		return A2(
+			$elm$http$Http$expectStringResponse,
+			toMsg,
+			$elm$http$Http$resolve(
+				function (string) {
+					return A2(
+						$elm$core$Result$mapError,
+						$elm$json$Json$Decode$errorToString,
+						A2($elm$json$Json$Decode$decodeString, decoder, string));
+				}));
+	});
+var $elm$http$Http$emptyBody = _Http_emptyBody;
+var $elm$http$Http$Request = function (a) {
+	return {$: 'Request', a: a};
 };
-var $elm$json$Json$Decode$list = _Json_decodeList;
+var $elm$http$Http$State = F2(
+	function (reqs, subs) {
+		return {reqs: reqs, subs: subs};
+	});
+var $elm$http$Http$init = $elm$core$Task$succeed(
+	A2($elm$http$Http$State, $elm$core$Dict$empty, _List_Nil));
+var $elm$core$Process$kill = _Scheduler_kill;
+var $elm$core$Process$spawn = _Scheduler_spawn;
+var $elm$http$Http$updateReqs = F3(
+	function (router, cmds, reqs) {
+		updateReqs:
+		while (true) {
+			if (!cmds.b) {
+				return $elm$core$Task$succeed(reqs);
+			} else {
+				var cmd = cmds.a;
+				var otherCmds = cmds.b;
+				if (cmd.$ === 'Cancel') {
+					var tracker = cmd.a;
+					var _v2 = A2($elm$core$Dict$get, tracker, reqs);
+					if (_v2.$ === 'Nothing') {
+						var $temp$router = router,
+							$temp$cmds = otherCmds,
+							$temp$reqs = reqs;
+						router = $temp$router;
+						cmds = $temp$cmds;
+						reqs = $temp$reqs;
+						continue updateReqs;
+					} else {
+						var pid = _v2.a;
+						return A2(
+							$elm$core$Task$andThen,
+							function (_v3) {
+								return A3(
+									$elm$http$Http$updateReqs,
+									router,
+									otherCmds,
+									A2($elm$core$Dict$remove, tracker, reqs));
+							},
+							$elm$core$Process$kill(pid));
+					}
+				} else {
+					var req = cmd.a;
+					return A2(
+						$elm$core$Task$andThen,
+						function (pid) {
+							var _v4 = req.tracker;
+							if (_v4.$ === 'Nothing') {
+								return A3($elm$http$Http$updateReqs, router, otherCmds, reqs);
+							} else {
+								var tracker = _v4.a;
+								return A3(
+									$elm$http$Http$updateReqs,
+									router,
+									otherCmds,
+									A3($elm$core$Dict$insert, tracker, pid, reqs));
+							}
+						},
+						$elm$core$Process$spawn(
+							A3(
+								_Http_toTask,
+								router,
+								$elm$core$Platform$sendToApp(router),
+								req)));
+				}
+			}
+		}
+	});
+var $elm$http$Http$onEffects = F4(
+	function (router, cmds, subs, state) {
+		return A2(
+			$elm$core$Task$andThen,
+			function (reqs) {
+				return $elm$core$Task$succeed(
+					A2($elm$http$Http$State, reqs, subs));
+			},
+			A3($elm$http$Http$updateReqs, router, cmds, state.reqs));
+	});
+var $elm$core$List$maybeCons = F3(
+	function (f, mx, xs) {
+		var _v0 = f(mx);
+		if (_v0.$ === 'Just') {
+			var x = _v0.a;
+			return A2($elm$core$List$cons, x, xs);
+		} else {
+			return xs;
+		}
+	});
+var $elm$core$List$filterMap = F2(
+	function (f, xs) {
+		return A3(
+			$elm$core$List$foldr,
+			$elm$core$List$maybeCons(f),
+			_List_Nil,
+			xs);
+	});
+var $elm$http$Http$maybeSend = F4(
+	function (router, desiredTracker, progress, _v0) {
+		var actualTracker = _v0.a;
+		var toMsg = _v0.b;
+		return _Utils_eq(desiredTracker, actualTracker) ? $elm$core$Maybe$Just(
+			A2(
+				$elm$core$Platform$sendToApp,
+				router,
+				toMsg(progress))) : $elm$core$Maybe$Nothing;
+	});
+var $elm$http$Http$onSelfMsg = F3(
+	function (router, _v0, state) {
+		var tracker = _v0.a;
+		var progress = _v0.b;
+		return A2(
+			$elm$core$Task$andThen,
+			function (_v1) {
+				return $elm$core$Task$succeed(state);
+			},
+			$elm$core$Task$sequence(
+				A2(
+					$elm$core$List$filterMap,
+					A3($elm$http$Http$maybeSend, router, tracker, progress),
+					state.subs)));
+	});
+var $elm$http$Http$Cancel = function (a) {
+	return {$: 'Cancel', a: a};
+};
+var $elm$http$Http$cmdMap = F2(
+	function (func, cmd) {
+		if (cmd.$ === 'Cancel') {
+			var tracker = cmd.a;
+			return $elm$http$Http$Cancel(tracker);
+		} else {
+			var r = cmd.a;
+			return $elm$http$Http$Request(
+				{
+					allowCookiesFromOtherDomains: r.allowCookiesFromOtherDomains,
+					body: r.body,
+					expect: A2(_Http_mapExpect, func, r.expect),
+					headers: r.headers,
+					method: r.method,
+					timeout: r.timeout,
+					tracker: r.tracker,
+					url: r.url
+				});
+		}
+	});
+var $elm$http$Http$MySub = F2(
+	function (a, b) {
+		return {$: 'MySub', a: a, b: b};
+	});
+var $elm$http$Http$subMap = F2(
+	function (func, _v0) {
+		var tracker = _v0.a;
+		var toMsg = _v0.b;
+		return A2(
+			$elm$http$Http$MySub,
+			tracker,
+			A2($elm$core$Basics$composeR, toMsg, func));
+	});
+_Platform_effectManagers['Http'] = _Platform_createManager($elm$http$Http$init, $elm$http$Http$onEffects, $elm$http$Http$onSelfMsg, $elm$http$Http$cmdMap, $elm$http$Http$subMap);
+var $elm$http$Http$command = _Platform_leaf('Http');
+var $elm$http$Http$subscription = _Platform_leaf('Http');
+var $elm$http$Http$request = function (r) {
+	return $elm$http$Http$command(
+		$elm$http$Http$Request(
+			{allowCookiesFromOtherDomains: false, body: r.body, expect: r.expect, headers: r.headers, method: r.method, timeout: r.timeout, tracker: r.tracker, url: r.url}));
+};
+var $elm$http$Http$get = function (r) {
+	return $elm$http$Http$request(
+		{body: $elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: $elm$core$Maybe$Nothing, tracker: $elm$core$Maybe$Nothing, url: r.url});
+};
 var $author$project$Main$Repository = F5(
 	function (name, _private, description, folk, url) {
 		return {description: description, folk: folk, name: name, _private: _private, url: url};
 	});
-var $elm$json$Json$Decode$bool = _Json_decodeBool;
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$list = _Json_decodeList;
 var $elm$json$Json$Decode$map5 = _Json_map5;
-var $author$project$Main$repositoryDecoder = A6(
-	$elm$json$Json$Decode$map5,
-	$author$project$Main$Repository,
-	A2($elm$json$Json$Decode$field, 'name', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'private', $elm$json$Json$Decode$bool),
-	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'folk', $elm$json$Json$Decode$bool),
-	A2($elm$json$Json$Decode$field, 'url', $elm$json$Json$Decode$string));
-var $author$project$Main$repositoriesDecoder = $elm$json$Json$Decode$list($author$project$Main$repositoryDecoder);
-var $author$project$Main$getRepositoryDataTask = $elm$http$Http$task(
-	{
-		body: $elm$http$Http$emptyBody,
-		headers: _List_Nil,
-		method: 'GET',
-		resolver: $author$project$Main$jsonResolver($author$project$Main$repositoriesDecoder),
-		timeout: $elm$core$Maybe$Nothing,
-		url: 'https://api.github.com/users/aoaoaoaoaoaoaoi/repos'
-	});
-var $author$project$Main$getRepositoryData = A2($elm$core$Task$attempt, $author$project$Main$ReceiveRepositoryData, $author$project$Main$getRepositoryDataTask);
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $author$project$Main$repositoriesDecoder = $elm$json$Json$Decode$list(
+	A6(
+		$elm$json$Json$Decode$map5,
+		$author$project$Main$Repository,
+		A2($elm$json$Json$Decode$field, 'name', $elm$json$Json$Decode$string),
+		A2($elm$json$Json$Decode$field, 'private', $elm$json$Json$Decode$string),
+		A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
+		A2($elm$json$Json$Decode$field, 'folk', $elm$json$Json$Decode$string),
+		A2($elm$json$Json$Decode$field, 'url', $elm$json$Json$Decode$string)));
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		A2($author$project$Main$Model, $author$project$Main$Waiting, $author$project$Main$Waiting),
-		$elm$core$Platform$Cmd$batch(
-			_List_fromArray(
-				[$author$project$Main$getCompetitiveData, $author$project$Main$getRepositoryData])));
+		$author$project$Main$Model($author$project$Main$Waiting),
+		$elm$http$Http$get(
+			{
+				expect: A2($elm$http$Http$expectJson, $author$project$Main$ReceiveRepositoryData, $author$project$Main$repositoriesDecoder),
+				url: 'https://api.github.com/users/aoaoaoaoaoaoaoi/repos'
+			}));
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Main$Failed = function (a) {
 	return {$: 'Failed', a: a};
 };
-var $author$project$Main$LoadedCompetitiveData = function (a) {
-	return {$: 'LoadedCompetitiveData', a: a};
-};
 var $author$project$Main$LoadedRepositoryData = function (a) {
 	return {$: 'LoadedRepositoryData', a: a};
 };
+var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		switch (msg.$) {
-			case 'Send':
+		if (msg.$ === 'Send') {
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{repositoryDataState: $author$project$Main$Waiting}),
+				$elm$http$Http$get(
+					{
+						expect: A2($elm$http$Http$expectJson, $author$project$Main$ReceiveRepositoryData, $author$project$Main$repositoriesDecoder),
+						url: 'https://api.github.com/users/aoaoaoaoaoaoaoi/repos'
+					}));
+		} else {
+			if (msg.a.$ === 'Ok') {
+				var repository = msg.a.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{competitiveDataState: $author$project$Main$Waiting, repositoryDataState: $author$project$Main$Waiting}),
-					$elm$core$Platform$Cmd$batch(
-						_List_fromArray(
-							[$author$project$Main$getCompetitiveData, $author$project$Main$getRepositoryData])));
-			case 'ReceiveCompetitiveData':
-				if (msg.a.$ === 'Ok') {
-					var competitiveUser = msg.a.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								competitiveDataState: $author$project$Main$LoadedCompetitiveData(competitiveUser)
-							}),
-						$elm$core$Platform$Cmd$none);
-				} else {
-					var e = msg.a.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								competitiveDataState: $author$project$Main$Failed(e)
-							}),
-						$elm$core$Platform$Cmd$none);
-				}
-			default:
-				if (msg.a.$ === 'Ok') {
-					var repository = msg.a.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								repositoryDataState: $author$project$Main$LoadedRepositoryData(repository)
-							}),
-						$elm$core$Platform$Cmd$none);
-				} else {
-					var e = msg.a.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								repositoryDataState: $author$project$Main$Failed(e)
-							}),
-						$elm$core$Platform$Cmd$none);
-				}
+						{
+							repositoryDataState: $author$project$Main$LoadedRepositoryData(repository)
+						}),
+					$elm$core$Platform$Cmd$none);
+			} else {
+				var e = msg.a.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							repositoryDataState: $author$project$Main$Failed(e)
+						}),
+					$elm$core$Platform$Cmd$none);
+			}
 		}
 	});
 var $author$project$Main$Career = {$: 'Career'};
@@ -6115,110 +6199,6 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $author$project$Main$ratingColor = function (rate) {
-	return (rate < 400) ? 'Gray' : ((rate < 800) ? 'Brown' : ((rate < 1200) ? 'Green' : ((rate < 1600) ? 'Light Blue' : 'None')));
-};
-var $elm$html$Html$span = _VirtualDom_node('span');
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$core$Debug$toString = _Debug_toString;
-var $author$project$Main$competitiveInfo = function (state) {
-	switch (state.$) {
-		case 'Init':
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('')
-					]));
-		case 'Waiting':
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Waiting...')
-					]));
-		case 'LoadedCompetitiveData':
-			var competitiveUser = state.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$span,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Color : ')
-									])),
-								A2(
-								$elm$html$Html$span,
-								_List_fromArray(
-									[
-										A2($elm$html$Html$Attributes$style, 'color', competitiveUser.color)
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(
-										$author$project$Main$ratingColor(competitiveUser.rating))
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$span,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Rating : ')
-									])),
-								A2(
-								$elm$html$Html$span,
-								_List_fromArray(
-									[
-										A2($elm$html$Html$Attributes$style, 'color', competitiveUser.color)
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(
-										$elm$core$String$fromInt(competitiveUser.rating))
-									]))
-							]))
-					]));
-		case 'LoadedRepositoryData':
-			var repository = state.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('')
-					]));
-		default:
-			var error = state.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(
-						$elm$core$Debug$toString(error))
-					]));
-	}
-};
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
@@ -6257,6 +6237,7 @@ var $author$project$Main$displayName = function (sectionType) {
 			return 'CONTACT';
 	}
 };
+var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Main$iconItem = function (icon) {
 	return A2(
 		$elm$html$Html$span,
@@ -6280,6 +6261,8 @@ var $author$project$Main$sectionId = function (sectionType) {
 			return 'contact-section';
 	}
 };
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$linkItem = function (sectionType) {
 	return A2(
 		$elm$html$Html$li,
@@ -6315,6 +6298,7 @@ var $elm$core$List$head = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
+var $elm$core$Debug$toString = _Debug_toString;
 var $author$project$Main$repositoryInfo = function (state) {
 	switch (state.$) {
 		case 'Init':
@@ -6332,15 +6316,6 @@ var $author$project$Main$repositoryInfo = function (state) {
 				_List_fromArray(
 					[
 						$elm$html$Html$text('Waiting...')
-					]));
-		case 'LoadedCompetitiveData':
-			var competitiveUser = state.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('')
 					]));
 		case 'LoadedRepositoryData':
 			var repositories = state.a;
@@ -6857,7 +6832,13 @@ var $author$project$Main$view = function (model) {
 																						$elm$html$Html$text('aochan')
 																					]))
 																			])),
-																		$author$project$Main$competitiveInfo(model.competitiveDataState)
+																		A2(
+																		$elm$html$Html$div,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('')
+																			]))
 																	]))
 															]))
 													])),
