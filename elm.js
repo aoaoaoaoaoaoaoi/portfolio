@@ -6003,18 +6003,28 @@ var $author$project$Main$ReceiveRepositoryData = function (a) {
 };
 var $elm$json$Json$Decode$list = _Json_decodeList;
 var $author$project$Main$Repository = F5(
-	function (name, _private, description, folk, url) {
-		return {description: description, folk: folk, name: name, _private: _private, url: url};
+	function (name, _private, description, fork, url) {
+		return {description: description, fork: fork, name: name, _private: _private, url: url};
 	});
 var $elm$json$Json$Decode$bool = _Json_decodeBool;
 var $elm$json$Json$Decode$map5 = _Json_map5;
+var $elm$json$Json$Decode$oneOf = _Json_oneOf;
+var $elm$json$Json$Decode$maybe = function (decoder) {
+	return $elm$json$Json$Decode$oneOf(
+		_List_fromArray(
+			[
+				A2($elm$json$Json$Decode$map, $elm$core$Maybe$Just, decoder),
+				$elm$json$Json$Decode$succeed($elm$core$Maybe$Nothing)
+			]));
+};
 var $author$project$Main$repositoryDecoder = A6(
 	$elm$json$Json$Decode$map5,
 	$author$project$Main$Repository,
 	A2($elm$json$Json$Decode$field, 'name', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'private', $elm$json$Json$Decode$bool),
-	A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'folk', $elm$json$Json$Decode$bool),
+	$elm$json$Json$Decode$maybe(
+		A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string)),
+	A2($elm$json$Json$Decode$field, 'fork', $elm$json$Json$Decode$bool),
 	A2($elm$json$Json$Decode$field, 'url', $elm$json$Json$Decode$string));
 var $author$project$Main$repositoriesDecoder = $elm$json$Json$Decode$list($author$project$Main$repositoryDecoder);
 var $author$project$Main$getRepositoryDataTask = $elm$http$Http$task(

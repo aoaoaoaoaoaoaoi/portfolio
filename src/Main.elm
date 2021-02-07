@@ -439,8 +439,8 @@ competitiveUserDecoder =
 type alias Repository =
     { name : String
     , private : Bool
-    , description : String
-    , folk : Bool
+    , description : Maybe String
+    , fork : Bool
     , url : String
     }
 
@@ -455,6 +455,6 @@ repositoryDecoder =
     D.map5 Repository
         (D.field "name" D.string)
         (D.field "private" D.bool)
-        (D.field "description" D.string)
-        (D.field "folk" D.bool)
+        (D.maybe (D.field "description" D.string))
+        (D.field "fork" D.bool)
         (D.field "url" D.string)
