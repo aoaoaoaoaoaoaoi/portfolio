@@ -287,15 +287,31 @@ repositoryInfo state =
             div [] [ text "" ]
 
         LoadedRepositoryData repositories ->
-            case head repositories of
-                Just value ->
-                    div [] [ text value.name ]
-
-                Nothing ->
-                    div [] [ text "" ]
+            List.map repositoryInfoPart repositories
 
         Failed error ->
             div [] [ text (Debug.toString error) ]
+
+
+repositoryInfoPart : Repository -> Html msg
+repositoryInfoPart repository =
+    div []
+        [ a [ href repository.url ]
+            [ text repository.name ]
+        , div
+            []
+            [ text (maybeStringToString repository.description) ]
+        ]
+
+
+maybeStringToString : Maybe String -> String
+maybeStringToString str =
+    case str of
+        Just value ->
+            value
+
+        Nothing ->
+            ""
 
 
 {-| competitionInfo
