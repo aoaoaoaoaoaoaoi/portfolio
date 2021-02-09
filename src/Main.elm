@@ -185,8 +185,9 @@ view model =
                             [ li [] [ text "Unity" ]
                             , li [] [ text "C#" ]
                             , li [] [ text "PHP(Laravel)" ]
-                            , li [] [ text "MySQL" ]
-                            , li [] [ text "AWS(EC2, RDS, S3)" ]
+
+                            -- , li [] [ text "MySQL" ]
+                            -- , li [] [ text "AWS(EC2, RDS, S3)" ]
                             ]
                         ]
                     ]
@@ -197,10 +198,19 @@ view model =
                     , div [ class "section-content" ]
                         [ div [ class "section-inner-content" ]
                             [ div [ class "section-inner-content-heading" ]
-                                [ h3 [] [ text "# Reading technical books" ]
+                                [ h3 [] [ text "# Development" ]
                                 ]
-                            , div [ class "section-inner-content-content" ]
-                                [ ul [] [ li [] [ text "anything" ] ]
+                            , div []
+                                [ -- repositoryInfo model.repositoryDataState
+                                  ul []
+                                    [ li []
+                                        [ a [ href "https://github.com/aoaoaoaoaoaoaoi" ] [ text "GitHub" ]
+                                        ]
+                                    , li []
+                                        [ a [ href "https://unityroom.com/users/1y49ivzokmwar7n2xe3u" ] [ text "unityroom" ]
+                                        ]
+                                    , div [] [ text "Game Development (old)" ]
+                                    ]
                                 ]
                             ]
                         , div [ class "section-inner-content" ]
@@ -228,18 +238,28 @@ view model =
                                     ]
                                 ]
                             ]
-                        , div [ class "section-inner-content" ]
-                            [ div [ class "section-inner-content-heading" ]
-                                [ h3 [] [ text "# Creating in free time" ]
-                                ]
-                            , div []
-                                [ repositoryInfo model.repositoryDataState
-                                ]
-                            ]
-                        , div [ class "section-inner-content" ]
-                            [ div [ class "section-inner-content-heading" ]
-                                [ h3 [] [ text "# Creating Games" ]
-                                ]
+
+                        {- , div [ class "section-inner-content" ]
+                           [ div [ class "section-inner-content-heading" ]
+                               [ h3 [] [ text "# Others" ]
+                               ]
+                           , div [ class "section-inner-content-content" ]
+                               [ ul []
+                                   [ li [] [ text "Reading technical books" ]
+                                   , li [] [ text "Mathematics" ]
+                                   ]
+                               ]
+                           ]
+                        -}
+                        ]
+                    ]
+                ]
+            , section [ id (sectionId Contact) ]
+                [ div [ class "inner" ]
+                    [ sectionHeader Contact
+                    , div [ class "section-content" ]
+                        [ ul []
+                            [ li [] [ a [ href "https://twitter.com/pirorirori_n712" ] [ text "Twitter" ] ]
                             ]
                         ]
                     ]
@@ -297,6 +317,7 @@ repositoriesInfoPart : List Repository -> Html msg
 repositoriesInfoPart repositories =
     div [] (List.map (\acc -> repositoryInfoPart acc) repositories)
 
+
 repositoryInfoPart : Repository -> Html msg
 repositoryInfoPart repository =
     div []
@@ -306,6 +327,7 @@ repositoryInfoPart repository =
             []
             [ text (maybeStringToString repository.description) ]
         ]
+
 
 maybeStringToString : Maybe String -> String
 maybeStringToString str =

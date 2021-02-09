@@ -6316,93 +6316,6 @@ var $author$project$Main$linkItem = function (sectionType) {
 			]));
 };
 var $elm$html$Html$nav = _VirtualDom_node('nav');
-var $author$project$Main$maybeStringToString = function (str) {
-	if (str.$ === 'Just') {
-		var value = str.a;
-		return value;
-	} else {
-		return '';
-	}
-};
-var $author$project$Main$repositoryInfoPart = function (repository) {
-	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$a,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$href(repository.url)
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text(repository.name)
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(
-						$author$project$Main$maybeStringToString(repository.description))
-					]))
-			]));
-};
-var $author$project$Main$repositoriesInfoPart = function (repositories) {
-	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		A2(
-			$elm$core$List$map,
-			function (acc) {
-				return $author$project$Main$repositoryInfoPart(acc);
-			},
-			repositories));
-};
-var $author$project$Main$repositoryInfo = function (state) {
-	switch (state.$) {
-		case 'Init':
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('')
-					]));
-		case 'Waiting':
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Waiting...')
-					]));
-		case 'LoadedCompetitiveData':
-			var competitiveUser = state.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('')
-					]));
-		case 'LoadedRepositoryData':
-			var repositories = state.a;
-			return $author$project$Main$repositoriesInfoPart(repositories);
-		default:
-			var error = state.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(
-						$elm$core$Debug$toString(error))
-					]));
-	}
-};
 var $elm$html$Html$section = _VirtualDom_node('section');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $author$project$Main$sectionHeader = function (sectionType) {
@@ -6631,20 +6544,6 @@ var $author$project$Main$view = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text('PHP(Laravel)')
-															])),
-														A2(
-														$elm$html$Html$li,
-														_List_Nil,
-														_List_fromArray(
-															[
-																$elm$html$Html$text('MySQL')
-															])),
-														A2(
-														$elm$html$Html$li,
-														_List_Nil,
-														_List_fromArray(
-															[
-																$elm$html$Html$text('AWS(EC2, RDS, S3)')
 															]))
 													]))
 											]))
@@ -6697,15 +6596,12 @@ var $author$project$Main$view = function (model) {
 																_List_Nil,
 																_List_fromArray(
 																	[
-																		$elm$html$Html$text('# Reading technical books')
+																		$elm$html$Html$text('# Development')
 																	]))
 															])),
 														A2(
 														$elm$html$Html$div,
-														_List_fromArray(
-															[
-																$elm$html$Html$Attributes$class('section-inner-content-content')
-															]),
+														_List_Nil,
 														_List_fromArray(
 															[
 																A2(
@@ -6718,7 +6614,39 @@ var $author$project$Main$view = function (model) {
 																		_List_Nil,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$text('anything')
+																				A2(
+																				$elm$html$Html$a,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$Attributes$href('https://github.com/aoaoaoaoaoaoaoi')
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('GitHub')
+																					]))
+																			])),
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				A2(
+																				$elm$html$Html$a,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$Attributes$href('https://unityroom.com/users/1y49ivzokmwar7n2xe3u')
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('unityroom')
+																					]))
+																			])),
+																		A2(
+																		$elm$html$Html$div,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('Game Development (old)')
 																			]))
 																	]))
 															]))
@@ -6888,61 +6816,55 @@ var $author$project$Main$view = function (model) {
 																		$author$project$Main$competitiveInfo(model.competitiveDataState)
 																	]))
 															]))
-													])),
+													]))
+											]))
+									]))
+							])),
+						A2(
+						$elm$html$Html$section,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$id(
+								$author$project$Main$sectionId($author$project$Main$Contact))
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('inner')
+									]),
+								_List_fromArray(
+									[
+										$author$project$Main$sectionHeader($author$project$Main$Contact),
+										A2(
+										$elm$html$Html$div,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('section-content')
+											]),
+										_List_fromArray(
+											[
 												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('section-inner-content')
-													]),
+												$elm$html$Html$ul,
+												_List_Nil,
 												_List_fromArray(
 													[
 														A2(
-														$elm$html$Html$div,
-														_List_fromArray(
-															[
-																$elm$html$Html$Attributes$class('section-inner-content-heading')
-															]),
-														_List_fromArray(
-															[
-																A2(
-																$elm$html$Html$h3,
-																_List_Nil,
-																_List_fromArray(
-																	[
-																		$elm$html$Html$text('# Creating in free time')
-																	]))
-															])),
-														A2(
-														$elm$html$Html$div,
+														$elm$html$Html$li,
 														_List_Nil,
 														_List_fromArray(
 															[
-																$author$project$Main$repositoryInfo(model.repositoryDataState)
-															]))
-													])),
-												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('section-inner-content')
-													]),
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$div,
-														_List_fromArray(
-															[
-																$elm$html$Html$Attributes$class('section-inner-content-heading')
-															]),
-														_List_fromArray(
-															[
 																A2(
-																$elm$html$Html$h3,
-																_List_Nil,
+																$elm$html$Html$a,
 																_List_fromArray(
 																	[
-																		$elm$html$Html$text('# Creating Games')
+																		$elm$html$Html$Attributes$href('https://twitter.com/pirorirori_n712')
+																	]),
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text('Twitter')
 																	]))
 															]))
 													]))
