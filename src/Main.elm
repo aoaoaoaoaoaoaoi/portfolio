@@ -287,11 +287,15 @@ repositoryInfo state =
             div [] [ text "" ]
 
         LoadedRepositoryData repositories ->
-            List.map repositoryInfoPart repositories
+            repositoriesInfoPart repositories
 
         Failed error ->
             div [] [ text (Debug.toString error) ]
 
+
+repositoriesInfoPart : List Repository -> Html msg
+repositoriesInfoPart repositories =
+    div [] (List.map (\acc -> repositoryInfoPart acc) repositories)
 
 repositoryInfoPart : Repository -> Html msg
 repositoryInfoPart repository =
@@ -302,7 +306,6 @@ repositoryInfoPart repository =
             []
             [ text (maybeStringToString repository.description) ]
         ]
-
 
 maybeStringToString : Maybe String -> String
 maybeStringToString str =

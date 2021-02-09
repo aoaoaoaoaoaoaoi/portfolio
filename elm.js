@@ -6316,14 +6316,50 @@ var $author$project$Main$linkItem = function (sectionType) {
 			]));
 };
 var $elm$html$Html$nav = _VirtualDom_node('nav');
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
+var $author$project$Main$maybeStringToString = function (str) {
+	if (str.$ === 'Just') {
+		var value = str.a;
+		return value;
 	} else {
-		return $elm$core$Maybe$Nothing;
+		return '';
 	}
+};
+var $author$project$Main$repositoryInfoPart = function (repository) {
+	return A2(
+		$elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$a,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$href(repository.url)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(repository.name)
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$author$project$Main$maybeStringToString(repository.description))
+					]))
+			]));
+};
+var $author$project$Main$repositoriesInfoPart = function (repositories) {
+	return A2(
+		$elm$html$Html$div,
+		_List_Nil,
+		A2(
+			$elm$core$List$map,
+			function (acc) {
+				return $author$project$Main$repositoryInfoPart(acc);
+			},
+			repositories));
 };
 var $author$project$Main$repositoryInfo = function (state) {
 	switch (state.$) {
@@ -6354,25 +6390,7 @@ var $author$project$Main$repositoryInfo = function (state) {
 					]));
 		case 'LoadedRepositoryData':
 			var repositories = state.a;
-			var _v1 = $elm$core$List$head(repositories);
-			if (_v1.$ === 'Just') {
-				var value = _v1.a;
-				return A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text(value.name)
-						]));
-			} else {
-				return A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('')
-						]));
-			}
+			return $author$project$Main$repositoriesInfoPart(repositories);
 		default:
 			var error = state.a;
 			return A2(
