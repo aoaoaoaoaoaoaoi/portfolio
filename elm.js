@@ -6112,7 +6112,6 @@ var $author$project$Main$update = F2(
 var $author$project$Main$Career = {$: 'Career'};
 var $author$project$Main$Contact = {$: 'Contact'};
 var $author$project$Main$Hobby = {$: 'Hobby'};
-var $author$project$Main$Profile = {$: 'Profile'};
 var $author$project$Main$Skill = {$: 'Skill'};
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
@@ -6237,7 +6236,6 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
-var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $author$project$Main$displayIcon = function (sectionType) {
 	switch (sectionType.$) {
@@ -6351,12 +6349,6 @@ var $author$project$Main$sectionHeader = function (sectionType) {
 					]))
 			]));
 };
-var $elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Main$view = function (model) {
 	return A2(
@@ -6380,7 +6372,6 @@ var $author$project$Main$view = function (model) {
 							]),
 						_List_fromArray(
 							[
-								$author$project$Main$linkItem($author$project$Main$Profile),
 								$author$project$Main$linkItem($author$project$Main$Career),
 								$author$project$Main$linkItem($author$project$Main$Skill),
 								$author$project$Main$linkItem($author$project$Main$Hobby),
@@ -6395,62 +6386,6 @@ var $author$project$Main$view = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$section,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$id(
-								$author$project$Main$sectionId($author$project$Main$Profile))
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('inner')
-									]),
-								_List_fromArray(
-									[
-										$author$project$Main$sectionHeader($author$project$Main$Profile),
-										A2(
-										$elm$html$Html$div,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('two-column-wrapper section-content')
-											]),
-										_List_fromArray(
-											[
-												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('two-column-left')
-													]),
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$img,
-														_List_fromArray(
-															[
-																$elm$html$Html$Attributes$class('profile-image'),
-																$elm$html$Html$Attributes$src('./image/profile.jpeg')
-															]),
-														_List_Nil)
-													])),
-												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('two-column-right')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('テキスト')
-													]))
-											]))
-									]))
-							])),
 						A2(
 						$elm$html$Html$section,
 						_List_fromArray(
@@ -6543,7 +6478,7 @@ var $author$project$Main$view = function (model) {
 														_List_Nil,
 														_List_fromArray(
 															[
-																$elm$html$Html$text('PHP(Laravel)')
+																$elm$html$Html$text('PHP(Laravel)(WebAPI)')
 															]))
 													]))
 											]))

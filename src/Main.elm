@@ -148,27 +148,31 @@ view model =
     div []
         [ nav [ class "gnav" ]
             [ ul [ class "gnav-list" ]
-                [ linkItem Profile
-                , linkItem Career
+                [ {- linkItem Profile
+                     ,
+                  -}
+                  linkItem Career
                 , linkItem Skill
                 , linkItem Hobby
                 , linkItem Contact
                 ]
             ]
         , div [ class "content" ]
-            [ section [ id (sectionId Profile) ]
-                [ div [ class "inner" ]
-                    [ sectionHeader Profile
-                    , div [ class "two-column-wrapper section-content" ]
-                        [ div [ class "two-column-left" ]
-                            [ img [ class "profile-image", src "./image/profile.jpeg" ] []
-                            ]
-                        , div [ class "two-column-right" ]
-                            [ text "テキスト" ]
-                        ]
-                    ]
-                ]
-            , section [ id (sectionId Career) ]
+            [ {- section [ id (sectionId Profile) ]
+                     [ div [ class "inner" ]
+                         [ sectionHeader Profile
+                         , div [ class "two-column-wrapper section-content" ]
+                             [ div [ class "two-column-left" ]
+                                 [ img [ class "profile-image", src "./image/profile.jpeg" ] []
+                                 ]
+                             , div [ class "two-column-right" ]
+                                 [ text "テキスト" ]
+                             ]
+                         ]
+                     ]
+                 ,
+              -}
+              section [ id (sectionId Career) ]
                 [ div [ class "inner" ]
                     [ sectionHeader Career
                     , div [ class "section-content" ]
@@ -184,7 +188,7 @@ view model =
                         [ ul []
                             [ li [] [ text "Unity" ]
                             , li [] [ text "C#" ]
-                            , li [] [ text "PHP(Laravel)" ]
+                            , li [] [ text "PHP(Laravel)(WebAPI)" ]
 
                             -- , li [] [ text "MySQL" ]
                             -- , li [] [ text "AWS(EC2, RDS, S3)" ]
