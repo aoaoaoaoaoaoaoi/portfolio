@@ -63,6 +63,10 @@ header{
     text-decoration: none;
 }
 
+.gnav li a:link{
+    color: #8b949e;
+}
+
 .gnav li a:visited{
     color: #8b949e;
 }
