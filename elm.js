@@ -6385,7 +6385,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('item-frame')
+										$elm$html$Html$Attributes$class('language-toggle')
 									]),
 								_List_fromArray(
 									[
@@ -6394,7 +6394,7 @@ var $author$project$Main$view = function (model) {
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$type_('checkbox'),
-												$elm$html$Html$Attributes$id('setting-item-1'),
+												$elm$html$Html$Attributes$id('setting-item'),
 												$elm$html$Html$Attributes$class('checkbox')
 											]),
 										_List_Nil),
@@ -6403,7 +6403,7 @@ var $author$project$Main$view = function (model) {
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$class('switch'),
-												$elm$html$Html$Attributes$for('setting-item-1')
+												$elm$html$Html$Attributes$for('setting-item')
 											]),
 										_List_Nil),
 										A2(
@@ -6411,11 +6411,11 @@ var $author$project$Main$view = function (model) {
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$class('text'),
-												$elm$html$Html$Attributes$for('setting-item-1')
+												$elm$html$Html$Attributes$for('setting-item')
 											]),
 										_List_fromArray(
 											[
-												$elm$html$Html$text('a')
+												$elm$html$Html$text('Ja / En')
 											]))
 									]))
 							]))

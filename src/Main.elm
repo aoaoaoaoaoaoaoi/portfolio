@@ -161,10 +161,10 @@ view model =
                 , linkItem Skill
                 , linkItem Hobby
                 , linkItem Contact
-                , div [ class "item-frame" ]
-                    [ input [ type_ "checkbox", id "setting-item-1", class "checkbox" ] []
-                    , label [ class "switch", for "setting-item-1" ] []
-                    , label [ class "text", for "setting-item-1" ] [ text "a" ]
+                , div [ class "language-toggle" ]
+                    [ input [ type_ "checkbox", id "setting-item", class "checkbox" ] []
+                    , label [ class "switch", for "setting-item" ] []
+                    , label [ class "text", for "setting-item" ] [ text "Ja / En" ]
                     ]
                 ]
             ]
