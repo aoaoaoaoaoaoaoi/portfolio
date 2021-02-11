@@ -6047,6 +6047,7 @@ var $author$project$Main$init = function (_v0) {
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
+var $author$project$Main$English = {$: 'English'};
 var $author$project$Main$Failed = function (a) {
 	return {$: 'Failed', a: a};
 };
@@ -6088,7 +6089,7 @@ var $author$project$Main$update = F2(
 							}),
 						$elm$core$Platform$Cmd$none);
 				}
-			default:
+			case 'ReceiveRepositoryData':
 				if (msg.a.$ === 'Ok') {
 					var repository = msg.a.a;
 					return _Utils_Tuple2(
@@ -6108,6 +6109,14 @@ var $author$project$Main$update = F2(
 							}),
 						$elm$core$Platform$Cmd$none);
 				}
+			default:
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							language: _Utils_eq(model.language, $author$project$Main$Japanese) ? $author$project$Main$English : $author$project$Main$Japanese
+						}),
+					$elm$core$Platform$Cmd$none);
 		}
 	});
 var $author$project$Main$Career = {$: 'Career'};
@@ -6229,7 +6238,6 @@ var $author$project$Main$competitiveInfo = function (state) {
 					]));
 	}
 };
-var $elm$html$Html$Attributes$for = $elm$html$Html$Attributes$stringProperty('htmlFor');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
@@ -6238,8 +6246,6 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
-var $elm$html$Html$input = _VirtualDom_node('input');
-var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $author$project$Main$displayIcon = function (sectionType) {
 	switch (sectionType.$) {
@@ -6353,7 +6359,6 @@ var $author$project$Main$sectionHeader = function (sectionType) {
 					]))
 			]));
 };
-var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Main$view = function (model) {
 	return A2(
@@ -6380,44 +6385,7 @@ var $author$project$Main$view = function (model) {
 								$author$project$Main$linkItem($author$project$Main$Career),
 								$author$project$Main$linkItem($author$project$Main$Skill),
 								$author$project$Main$linkItem($author$project$Main$Hobby),
-								$author$project$Main$linkItem($author$project$Main$Contact),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('language-toggle')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$input,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$type_('checkbox'),
-												$elm$html$Html$Attributes$id('setting-item'),
-												$elm$html$Html$Attributes$class('checkbox')
-											]),
-										_List_Nil),
-										A2(
-										$elm$html$Html$label,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('switch'),
-												$elm$html$Html$Attributes$for('setting-item')
-											]),
-										_List_Nil),
-										A2(
-										$elm$html$Html$label,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('text'),
-												$elm$html$Html$Attributes$for('setting-item')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Ja / En')
-											]))
-									]))
+								$author$project$Main$linkItem($author$project$Main$Contact)
 							]))
 					])),
 				A2(

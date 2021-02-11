@@ -59,6 +59,7 @@ type Msg
     = Send
     | ReceiveCompetitiveData (Result Http.Error CompetitiveUser)
     | ReceiveRepositoryData (Result Http.Error (List Repository))
+    | ChangeLanguage
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -83,6 +84,18 @@ update msg model =
 
         ReceiveRepositoryData (Err e) ->
             ( { model | repositoryDataState = Failed e }, Cmd.none )
+
+        ChangeLanguage ->
+            ( { model
+                | language =
+                    if model.language == Japanese then
+                        English
+
+                    else
+                        Japanese
+              }
+            , Cmd.none
+            )
 
 
 getCompetitiveData : Cmd Msg
@@ -161,11 +174,13 @@ view model =
                 , linkItem Skill
                 , linkItem Hobby
                 , linkItem Contact
-                , div [ class "language-toggle" ]
-                    [ input [ type_ "checkbox", id "setting-item", class "checkbox" ] []
-                    , label [ class "switch", for "setting-item" ] []
-                    , label [ class "text", for "setting-item" ] [ text "Ja / En" ]
-                    ]
+
+                {- , div [ class "language-toggle" ]
+                   [ input [ type_ "checkbox", id "setting-item", class "checkbox", onCheck ChangeLanguage ] []
+                   , label [ class "switch", for "setting-item" ] []
+                   , label [ class "text", for "setting-item" ] [ text "Ja / En" ]
+                   ]
+                -}
                 ]
             ]
         , div [ class "content" ]
