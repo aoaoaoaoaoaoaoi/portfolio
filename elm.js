@@ -5319,9 +5319,10 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Main$Model = F2(
-	function (competitiveDataState, repositoryDataState) {
-		return {competitiveDataState: competitiveDataState, repositoryDataState: repositoryDataState};
+var $author$project$Main$Japanese = {$: 'Japanese'};
+var $author$project$Main$Model = F3(
+	function (competitiveDataState, repositoryDataState, language) {
+		return {competitiveDataState: competitiveDataState, language: language, repositoryDataState: repositoryDataState};
 	});
 var $author$project$Main$Waiting = {$: 'Waiting'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
@@ -6039,7 +6040,7 @@ var $author$project$Main$getRepositoryDataTask = $elm$http$Http$task(
 var $author$project$Main$getRepositoryData = A2($elm$core$Task$attempt, $author$project$Main$ReceiveRepositoryData, $author$project$Main$getRepositoryDataTask);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		A2($author$project$Main$Model, $author$project$Main$Waiting, $author$project$Main$Waiting),
+		A3($author$project$Main$Model, $author$project$Main$Waiting, $author$project$Main$Waiting, $author$project$Main$Japanese),
 		$elm$core$Platform$Cmd$batch(
 			_List_fromArray(
 				[$author$project$Main$getCompetitiveData, $author$project$Main$getRepositoryData])));
@@ -6228,6 +6229,7 @@ var $author$project$Main$competitiveInfo = function (state) {
 					]));
 	}
 };
+var $elm$html$Html$Attributes$for = $elm$html$Html$Attributes$stringProperty('htmlFor');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
@@ -6236,6 +6238,8 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $author$project$Main$displayIcon = function (sectionType) {
 	switch (sectionType.$) {
@@ -6349,6 +6353,7 @@ var $author$project$Main$sectionHeader = function (sectionType) {
 					]))
 			]));
 };
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$Main$view = function (model) {
 	return A2(
@@ -6375,7 +6380,44 @@ var $author$project$Main$view = function (model) {
 								$author$project$Main$linkItem($author$project$Main$Career),
 								$author$project$Main$linkItem($author$project$Main$Skill),
 								$author$project$Main$linkItem($author$project$Main$Hobby),
-								$author$project$Main$linkItem($author$project$Main$Contact)
+								$author$project$Main$linkItem($author$project$Main$Contact),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('item-frame')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$input,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$type_('checkbox'),
+												$elm$html$Html$Attributes$id('setting-item-1'),
+												$elm$html$Html$Attributes$class('checkbox')
+											]),
+										_List_Nil),
+										A2(
+										$elm$html$Html$label,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('switch'),
+												$elm$html$Html$Attributes$for('setting-item-1')
+											]),
+										_List_Nil),
+										A2(
+										$elm$html$Html$label,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('text'),
+												$elm$html$Html$Attributes$for('setting-item-1')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('a')
+											]))
+									]))
 							]))
 					])),
 				A2(

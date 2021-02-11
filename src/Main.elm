@@ -27,7 +27,13 @@ main =
 type alias Model =
     { competitiveDataState : DataState
     , repositoryDataState : DataState
+    , language : Language
     }
+
+
+type Language
+    = Japanese
+    | English
 
 
 type DataState
@@ -40,7 +46,7 @@ type DataState
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Model Waiting Waiting
+    ( Model Waiting Waiting Japanese
     , Cmd.batch [ getCompetitiveData, getRepositoryData ]
     )
 
@@ -155,6 +161,11 @@ view model =
                 , linkItem Skill
                 , linkItem Hobby
                 , linkItem Contact
+                , div [ class "item-frame" ]
+                    [ input [ type_ "checkbox", id "setting-item-1", class "checkbox" ] []
+                    , label [ class "switch", for "setting-item-1" ] []
+                    , label [ class "text", for "setting-item-1" ] [ text "a" ]
+                    ]
                 ]
             ]
         , div [ class "content" ]

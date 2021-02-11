@@ -152,3 +152,53 @@ h2:after{
 .two-column-right{
     width: 62%;
 }
+
+/*切替トグル*/
+.item-frame {
+    margin: 1rem auto;
+  }
+.text {
+    vertical-align: middle;
+  }
+label {
+    cursor: pointer;
+  }
+
+.switch:before, .switch:after {
+  content: "";
+  vertical-align: middle;
+  display: inline-block;
+}
+.switch:before {
+  width: 2em;
+  height: 1em;
+  border: 2px solid #c4c9ff;
+  border-radius: 32px;
+  background: #999;
+}
+.switch:after {
+    position: relative;
+  width: 1em;
+  height: 1em;
+  background: #c4c9ff;
+  border-radius: 50%;
+  left: -2.2em;
+}
+
+.switch {
+    position: relative; 
+  }
+  
+input { 
+    display: none;
+  }
+
+input:checked ~ .switch:before {
+    background: #00b715;
+    border-color: #84ff92;
+  }
+  
+input:checked ~ .switch:after {
+    background: #84ff92;
+    left: -1.1em;
+  }
