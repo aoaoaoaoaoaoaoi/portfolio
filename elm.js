@@ -6642,11 +6642,48 @@ var $author$project$Main$view = function (model) {
 																				$elm$html$Html$a,
 																				_List_fromArray(
 																					[
+																						$elm$html$Html$Attributes$href('https://zenn.dev/aoaoaoaoaoaoaoi')
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('Zenn')
+																					])),
+																				A2(
+																				$elm$html$Html$span,
+																				_List_Nil,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text(' (5.2021 -)')
+																					]))
+																			])),
+																		A2(
+																		$elm$html$Html$div,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('About technical matters and non-technical skills')
+																			])),
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				A2(
+																				$elm$html$Html$a,
+																				_List_fromArray(
+																					[
 																						$elm$html$Html$Attributes$href('http://bit.ly/3lrL7Ey')
 																					]),
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text('Qiita')
+																					])),
+																				A2(
+																				$elm$html$Html$span,
+																				_List_Nil,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text(' (- 4.2021)')
 																					]))
 																			])),
 																		A2(
@@ -6670,6 +6707,13 @@ var $author$project$Main$view = function (model) {
 																				_List_fromArray(
 																					[
 																						$elm$html$Html$text('Hatena Blog')
+																					])),
+																				A2(
+																				$elm$html$Html$span,
+																				_List_Nil,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text(' (- 4.2021)')
 																					]))
 																			])),
 																		A2(
