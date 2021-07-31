@@ -203,7 +203,9 @@ view model =
                     [ sectionHeader Career
                     , div [ class "section-content" ]
                         [ ul []
-                            [ li [] [ text "2017- social game engineer (Unity, PHP)" ] ]
+                            [ li [] [ text "2017- social game engineer (Unity, PHP)" ] 
+                            , li [] [ text "2021- social game server engineer (Python)" ] 
+                            ]
                         ]
                     ]
                 ]
@@ -215,6 +217,7 @@ view model =
                             [ li [] [ text "Unity" ]
                             , li [] [ text "C#" ]
                             , li [] [ text "PHP(Laravel)(WebAPI)" ]
+                            , li [] [ text "TOEIC:635(L:350 R:285)" ]
 
                             -- , li [] [ text "MySQL" ]
                             -- , li [] [ text "AWS(EC2, RDS, S3)" ]
