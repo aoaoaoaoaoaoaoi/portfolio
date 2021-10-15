@@ -6433,6 +6433,13 @@ var $author$project$Main$view = function (model) {
 														_List_fromArray(
 															[
 																$elm$html$Html$text('2017- social game engineer (Unity, PHP)')
+															])),
+														A2(
+														$elm$html$Html$li,
+														_List_Nil,
+														_List_fromArray(
+															[
+																$elm$html$Html$text('2021- social game server engineer (Python)')
 															]))
 													]))
 											]))
@@ -6465,30 +6472,112 @@ var $author$project$Main$view = function (model) {
 										_List_fromArray(
 											[
 												A2(
-												$elm$html$Html$ul,
-												_List_Nil,
+												$elm$html$Html$div,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('section-inner-content')
+													]),
 												_List_fromArray(
 													[
 														A2(
-														$elm$html$Html$li,
-														_List_Nil,
+														$elm$html$Html$div,
 														_List_fromArray(
 															[
-																$elm$html$Html$text('Unity')
+																$elm$html$Html$Attributes$class('section-inner-content-heading')
+															]),
+														_List_fromArray(
+															[
+																A2(
+																$elm$html$Html$h3,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text('# Technic')
+																	]))
 															])),
 														A2(
-														$elm$html$Html$li,
+														$elm$html$Html$div,
 														_List_Nil,
 														_List_fromArray(
 															[
-																$elm$html$Html$text('C#')
+																A2(
+																$elm$html$Html$ul,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('Python(Django)')
+																			])),
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('C#')
+																			])),
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('PHP(Laravel)')
+																			])),
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('Unity')
+																			]))
+																	]))
+															]))
+													])),
+												A2(
+												$elm$html$Html$div,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('section-inner-content')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$div,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$class('section-inner-content-heading')
+															]),
+														_List_fromArray(
+															[
+																A2(
+																$elm$html$Html$h3,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text('# Certification')
+																	]))
 															])),
 														A2(
-														$elm$html$Html$li,
+														$elm$html$Html$div,
 														_List_Nil,
 														_List_fromArray(
 															[
-																$elm$html$Html$text('PHP(Laravel)(WebAPI)')
+																A2(
+																$elm$html$Html$ul,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('TOEIC:635(L:350 R:285)')
+																			]))
+																	]))
 															]))
 													]))
 											]))
