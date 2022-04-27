@@ -6731,6 +6731,36 @@ var $author$project$Main$view = function (model) {
 																				$elm$html$Html$a,
 																				_List_fromArray(
 																					[
+																						$elm$html$Html$Attributes$href('https://gist.github.com/aoaoaoaoaoaoaoi')
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('GitHub Gist')
+																					])),
+																				A2(
+																				$elm$html$Html$span,
+																				_List_Nil,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text(' (4.2022 -)')
+																					]))
+																			])),
+																		A2(
+																		$elm$html$Html$div,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('About technical matters and non-technical skills')
+																			])),
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				A2(
+																				$elm$html$Html$a,
+																				_List_fromArray(
+																					[
 																						$elm$html$Html$Attributes$href('https://zenn.dev/aoaoaoaoaoaoaoi')
 																					]),
 																				_List_fromArray(

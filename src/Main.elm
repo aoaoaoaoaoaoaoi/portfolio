@@ -167,44 +167,20 @@ view model =
     div []
         [ nav [ class "gnav" ]
             [ ul [ class "gnav-list" ]
-                [ {- linkItem Profile
-                     ,
-                  -}
-                  linkItem Career
+                [ linkItem Career
                 , linkItem Skill
                 , linkItem Hobby
                 , linkItem Contact
-
-                {- , div [ class "language-toggle" ]
-                   [ input [ type_ "checkbox", id "setting-item", class "checkbox", onCheck ChangeLanguage ] []
-                   , label [ class "switch", for "setting-item" ] []
-                   , label [ class "text", for "setting-item" ] [ text "Ja / En" ]
-                   ]
-                -}
                 ]
             ]
         , div [ class "content" ]
-            [ {- section [ id (sectionId Profile) ]
-                     [ div [ class "inner" ]
-                         [ sectionHeader Profile
-                         , div [ class "two-column-wrapper section-content" ]
-                             [ div [ class "two-column-left" ]
-                                 [ img [ class "profile-image", src "./image/profile.jpeg" ] []
-                                 ]
-                             , div [ class "two-column-right" ]
-                                 [ text "テキスト" ]
-                             ]
-                         ]
-                     ]
-                 ,
-              -}
-              section [ id (sectionId Career) ]
+            [ section [ id (sectionId Career) ]
                 [ div [ class "inner" ]
                     [ sectionHeader Career
                     , div [ class "section-content" ]
                         [ ul []
-                            [ li [] [ text "2017- social game engineer (Unity, PHP)" ] 
-                            , li [] [ text "2021- social game server engineer (Python)" ] 
+                            [ li [] [ text "2017- social game engineer (Unity, PHP)" ]
+                            , li [] [ text "2021- social game server engineer (Python)" ]
                             ]
                         ]
                     ]
@@ -218,33 +194,27 @@ view model =
                                 [ h3 [] [ text "# Technic" ]
                                 ]
                             , div []
-                                [
-                                    ul []
-                                        [ li [] [ text "Python(Django)" ]
-                                        , li [] [ text "C#" ]
-                                        , li [] [ text "PHP(Laravel)" ]
-                                        , li [] [ text "Unity" ]
-
-                                        -- , li [] [ text "MySQL" ]
-                                        -- , li [] [ text "AWS(EC2, RDS, S3)" ]
-                                        ]   
+                                [ ul []
+                                    [ li [] [ text "Python(Django)" ]
+                                    , li [] [ text "C#" ]
+                                    , li [] [ text "PHP(Laravel)" ]
+                                    , li [] [ text "Unity"]
+                                    ]
                                 ]
                             ]
-                        ,div [ class "section-inner-content" ]
+                        , div [ class "section-inner-content" ]
                             [ div [ class "section-inner-content-heading" ]
                                 [ h3 [] [ text "# Certification" ]
                                 ]
                             , div []
-                                [
-                                    ul []
-                                        [ li [] [ text "TOEIC:635(L:350 R:285)" ]
-                                        ]   
+                                [ ul []
+                                    [ li [] [ text "TOEIC:635(L:350 R:285)" ]
+                                    ]
                                 ]
                             ]
                         ]
                     ]
                 ]
-                
             , section [ id (sectionId Hobby) ]
                 [ div [ class "inner" ]
                     [ sectionHeader Hobby
@@ -272,7 +242,9 @@ view model =
                                 ]
                             , div [ class "section-inner-content-content" ]
                                 [ ul []
-                                    [ li [] [ a [ href "https://zenn.dev/aoaoaoaoaoaoaoi" ] [ text "Zenn" ], span [] [ text " (5.2021 -)" ]  ]
+                                    [ li [] [ a [ href "https://gist.github.com/aoaoaoaoaoaoaoi" ] [ text "GitHub Gist" ], span [] [ text " (4.2022 -)" ] ]
+                                    , div [] [ text "About technical matters and non-technical skills" ]
+                                    , li [] [ a [ href "https://zenn.dev/aoaoaoaoaoaoaoi" ] [ text "Zenn" ], span [] [ text " (5.2021 -)" ] ]
                                     , div [] [ text "About technical matters and non-technical skills" ]
                                     , li [] [ a [ href "http://bit.ly/3lrL7Ey" ] [ text "Qiita" ], span [] [ text " (- 4.2021)" ] ]
                                     , div [] [ text "About technical matters" ]
@@ -293,19 +265,6 @@ view model =
                                     ]
                                 ]
                             ]
-
-                        {- , div [ class "section-inner-content" ]
-                           [ div [ class "section-inner-content-heading" ]
-                               [ h3 [] [ text "# Others" ]
-                               ]
-                           , div [ class "section-inner-content-content" ]
-                               [ ul []
-                                   [ li [] [ text "Reading technical books" ]
-                                   , li [] [ text "Mathematics" ]
-                                   ]
-                               ]
-                           ]
-                        -}
                         ]
                     ]
                 ]
