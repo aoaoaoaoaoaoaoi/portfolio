@@ -6575,6 +6575,13 @@ var $author$project$Main$view = function (model) {
 																		_List_Nil,
 																		_List_fromArray(
 																			[
+																				$elm$html$Html$text('応用情報技術者')
+																			])),
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
 																				$elm$html$Html$text('TOEIC:635(L:350 R:285)')
 																			]))
 																	]))
