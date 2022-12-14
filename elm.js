@@ -6575,6 +6575,13 @@ var $author$project$Main$view = function (model) {
 																		_List_Nil,
 																		_List_fromArray(
 																			[
+																				$elm$html$Html$text('AWS Certified Solutions Architect - Associate')
+																			])),
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
 																				$elm$html$Html$text('応用情報技術者')
 																			])),
 																		A2(
