@@ -5996,7 +5996,7 @@ var $author$project$Main$getCompetitiveDataTask = $elm$http$Http$task(
 		method: 'GET',
 		resolver: $author$project$Main$jsonResolver($author$project$Main$competitiveUserDecoder),
 		timeout: $elm$core$Maybe$Nothing,
-		url: 'https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan'
+		url: 'https://kyopro-ratings.jp1.su8.run/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan'
 	});
 var $author$project$Main$getCompetitiveData = A2($elm$core$Task$attempt, $author$project$Main$ReceiveCompetitiveData, $author$project$Main$getCompetitiveDataTask);
 var $author$project$Main$ReceiveRepositoryData = function (a) {
@@ -6570,6 +6570,13 @@ var $author$project$Main$view = function (model) {
 																_List_Nil,
 																_List_fromArray(
 																	[
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('情報処理安全確保支援士試験合格（情報処理安全確保支援士は未登録）')
+																			])),
 																		A2(
 																		$elm$html$Html$li,
 																		_List_Nil,

@@ -108,7 +108,7 @@ getCompetitiveDataTask =
     Http.task
         { method = "GET"
         , headers = []
-        , url = "https://kyopro-ratings.herokuapp.com/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
+        , url = "https://kyopro-ratings.jp1.su8.run/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan"
         , body = Http.emptyBody
         , resolver = jsonResolver competitiveUserDecoder
         , timeout = Nothing
@@ -208,7 +208,8 @@ view model =
                                 ]
                             , div []
                                 [ ul []
-                                    [ li [] [ text "AWS Certified Solutions Architect - Associate" ]
+                                    [ li [] [ text "情報処理安全確保支援士試験合格（情報処理安全確保支援士は未登録）" ]
+                                    , li [] [ text "AWS Certified Solutions Architect - Associate" ]
                                     , li [] [ text "応用情報技術者" ]
                                     , li [] [ text "TOEIC:635(L:350 R:285)" ]
                                     ]
