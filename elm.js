@@ -6575,6 +6575,13 @@ var $author$project$Main$view = function (model) {
 																		_List_Nil,
 																		_List_fromArray(
 																			[
+																				$elm$html$Html$text('データベーススペシャリスト')
+																			])),
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
 																				$elm$html$Html$text('情報処理安全確保支援士試験合格（情報処理安全確保支援士は未登録）')
 																			])),
 																		A2(
