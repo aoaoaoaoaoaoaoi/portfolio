@@ -5326,8 +5326,8 @@ var $author$project$Main$Model = F3(
 	});
 var $author$project$Main$Waiting = {$: 'Waiting'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $author$project$Main$ReceiveCompetitiveData = function (a) {
-	return {$: 'ReceiveCompetitiveData', a: a};
+var $author$project$Main$ReceiveRepositoryData = function (a) {
+	return {$: 'ReceiveRepositoryData', a: a};
 };
 var $elm$core$Basics$composeL = F3(
 	function (g, f, x) {
@@ -5353,36 +5353,6 @@ var $elm$core$Task$attempt = F2(
 							$elm$core$Result$Ok),
 						task))));
 	});
-var $author$project$Main$CompetitiveUser = F3(
-	function (color, rating, status) {
-		return {color: color, rating: rating, status: status};
-	});
-var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
-	});
-var $elm$json$Json$Decode$int = _Json_decodeInt;
-var $elm$json$Json$Decode$map3 = _Json_map3;
-var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Main$competitiveUserDecoder = A4(
-	$elm$json$Json$Decode$map3,
-	$author$project$Main$CompetitiveUser,
-	A2(
-		$elm$json$Json$Decode$at,
-		_List_fromArray(
-			['atcoder', 'color']),
-		$elm$json$Json$Decode$string),
-	A2(
-		$elm$json$Json$Decode$at,
-		_List_fromArray(
-			['atcoder', 'rating']),
-		$elm$json$Json$Decode$int),
-	A2(
-		$elm$json$Json$Decode$at,
-		_List_fromArray(
-			['atcoder', 'status']),
-		$elm$json$Json$Decode$string));
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
 		return {$: 'BadStatus_', a: a, b: b};
@@ -5972,6 +5942,34 @@ var $author$project$Main$jsonResolver = function (decoder) {
 			}
 		});
 };
+var $elm$json$Json$Decode$list = _Json_decodeList;
+var $author$project$Main$Repository = F5(
+	function (name, _private, description, fork, url) {
+		return {description: description, fork: fork, name: name, _private: _private, url: url};
+	});
+var $elm$json$Json$Decode$bool = _Json_decodeBool;
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$map5 = _Json_map5;
+var $elm$json$Json$Decode$oneOf = _Json_oneOf;
+var $elm$json$Json$Decode$maybe = function (decoder) {
+	return $elm$json$Json$Decode$oneOf(
+		_List_fromArray(
+			[
+				A2($elm$json$Json$Decode$map, $elm$core$Maybe$Just, decoder),
+				$elm$json$Json$Decode$succeed($elm$core$Maybe$Nothing)
+			]));
+};
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $author$project$Main$repositoryDecoder = A6(
+	$elm$json$Json$Decode$map5,
+	$author$project$Main$Repository,
+	A2($elm$json$Json$Decode$field, 'name', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'private', $elm$json$Json$Decode$bool),
+	$elm$json$Json$Decode$maybe(
+		A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string)),
+	A2($elm$json$Json$Decode$field, 'fork', $elm$json$Json$Decode$bool),
+	A2($elm$json$Json$Decode$field, 'url', $elm$json$Json$Decode$string));
+var $author$project$Main$repositoriesDecoder = $elm$json$Json$Decode$list($author$project$Main$repositoryDecoder);
 var $elm$core$Task$fail = _Scheduler_fail;
 var $elm$http$Http$resultToTask = function (result) {
 	if (result.$ === 'Ok') {
@@ -5989,45 +5987,6 @@ var $elm$http$Http$task = function (r) {
 		$elm$http$Http$resultToTask,
 		{allowCookiesFromOtherDomains: false, body: r.body, expect: r.resolver, headers: r.headers, method: r.method, timeout: r.timeout, tracker: $elm$core$Maybe$Nothing, url: r.url});
 };
-var $author$project$Main$getCompetitiveDataTask = $elm$http$Http$task(
-	{
-		body: $elm$http$Http$emptyBody,
-		headers: _List_Nil,
-		method: 'GET',
-		resolver: $author$project$Main$jsonResolver($author$project$Main$competitiveUserDecoder),
-		timeout: $elm$core$Maybe$Nothing,
-		url: 'https://kyopro-ratings.jp1.su8.run/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan'
-	});
-var $author$project$Main$getCompetitiveData = A2($elm$core$Task$attempt, $author$project$Main$ReceiveCompetitiveData, $author$project$Main$getCompetitiveDataTask);
-var $author$project$Main$ReceiveRepositoryData = function (a) {
-	return {$: 'ReceiveRepositoryData', a: a};
-};
-var $elm$json$Json$Decode$list = _Json_decodeList;
-var $author$project$Main$Repository = F5(
-	function (name, _private, description, fork, url) {
-		return {description: description, fork: fork, name: name, _private: _private, url: url};
-	});
-var $elm$json$Json$Decode$bool = _Json_decodeBool;
-var $elm$json$Json$Decode$map5 = _Json_map5;
-var $elm$json$Json$Decode$oneOf = _Json_oneOf;
-var $elm$json$Json$Decode$maybe = function (decoder) {
-	return $elm$json$Json$Decode$oneOf(
-		_List_fromArray(
-			[
-				A2($elm$json$Json$Decode$map, $elm$core$Maybe$Just, decoder),
-				$elm$json$Json$Decode$succeed($elm$core$Maybe$Nothing)
-			]));
-};
-var $author$project$Main$repositoryDecoder = A6(
-	$elm$json$Json$Decode$map5,
-	$author$project$Main$Repository,
-	A2($elm$json$Json$Decode$field, 'name', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'private', $elm$json$Json$Decode$bool),
-	$elm$json$Json$Decode$maybe(
-		A2($elm$json$Json$Decode$field, 'description', $elm$json$Json$Decode$string)),
-	A2($elm$json$Json$Decode$field, 'fork', $elm$json$Json$Decode$bool),
-	A2($elm$json$Json$Decode$field, 'url', $elm$json$Json$Decode$string));
-var $author$project$Main$repositoriesDecoder = $elm$json$Json$Decode$list($author$project$Main$repositoryDecoder);
 var $author$project$Main$getRepositoryDataTask = $elm$http$Http$task(
 	{
 		body: $elm$http$Http$emptyBody,
@@ -6043,7 +6002,7 @@ var $author$project$Main$init = function (_v0) {
 		A3($author$project$Main$Model, $author$project$Main$Waiting, $author$project$Main$Waiting, $author$project$Main$Japanese),
 		$elm$core$Platform$Cmd$batch(
 			_List_fromArray(
-				[$author$project$Main$getCompetitiveData, $author$project$Main$getRepositoryData])));
+				[$author$project$Main$getRepositoryData])));
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
@@ -6057,6 +6016,47 @@ var $author$project$Main$LoadedCompetitiveData = function (a) {
 var $author$project$Main$LoadedRepositoryData = function (a) {
 	return {$: 'LoadedRepositoryData', a: a};
 };
+var $author$project$Main$ReceiveCompetitiveData = function (a) {
+	return {$: 'ReceiveCompetitiveData', a: a};
+};
+var $author$project$Main$CompetitiveUser = F3(
+	function (color, rating, status) {
+		return {color: color, rating: rating, status: status};
+	});
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$json$Json$Decode$int = _Json_decodeInt;
+var $elm$json$Json$Decode$map3 = _Json_map3;
+var $author$project$Main$competitiveUserDecoder = A4(
+	$elm$json$Json$Decode$map3,
+	$author$project$Main$CompetitiveUser,
+	A2(
+		$elm$json$Json$Decode$at,
+		_List_fromArray(
+			['atcoder', 'color']),
+		$elm$json$Json$Decode$string),
+	A2(
+		$elm$json$Json$Decode$at,
+		_List_fromArray(
+			['atcoder', 'rating']),
+		$elm$json$Json$Decode$int),
+	A2(
+		$elm$json$Json$Decode$at,
+		_List_fromArray(
+			['atcoder', 'status']),
+		$elm$json$Json$Decode$string));
+var $author$project$Main$getCompetitiveDataTask = $elm$http$Http$task(
+	{
+		body: $elm$http$Http$emptyBody,
+		headers: _List_Nil,
+		method: 'GET',
+		resolver: $author$project$Main$jsonResolver($author$project$Main$competitiveUserDecoder),
+		timeout: $elm$core$Maybe$Nothing,
+		url: 'https://kyopro-ratings.jp1.su8.run/json?atcoder=aochan&codeforces=aochan&topcoder_algorithm=aochan&topcoder_marathon=aochan'
+	});
+var $author$project$Main$getCompetitiveData = A2($elm$core$Task$attempt, $author$project$Main$ReceiveCompetitiveData, $author$project$Main$getCompetitiveDataTask);
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$update = F2(
 	function (msg, model) {
@@ -6134,110 +6134,6 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $author$project$Main$ratingColor = function (rate) {
-	return (rate < 400) ? 'Gray' : ((rate < 800) ? 'Brown' : ((rate < 1200) ? 'Green' : ((rate < 1600) ? 'Light Blue' : 'None')));
-};
-var $elm$html$Html$span = _VirtualDom_node('span');
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$core$Debug$toString = _Debug_toString;
-var $author$project$Main$competitiveInfo = function (state) {
-	switch (state.$) {
-		case 'Init':
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('')
-					]));
-		case 'Waiting':
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Waiting...')
-					]));
-		case 'LoadedCompetitiveData':
-			var competitiveUser = state.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$span,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Color : ')
-									])),
-								A2(
-								$elm$html$Html$span,
-								_List_fromArray(
-									[
-										A2($elm$html$Html$Attributes$style, 'color', competitiveUser.color)
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(
-										$author$project$Main$ratingColor(competitiveUser.rating))
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$span,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Rating : ')
-									])),
-								A2(
-								$elm$html$Html$span,
-								_List_fromArray(
-									[
-										A2($elm$html$Html$Attributes$style, 'color', competitiveUser.color)
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(
-										$elm$core$String$fromInt(competitiveUser.rating))
-									]))
-							]))
-					]));
-		case 'LoadedRepositoryData':
-			var repository = state.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('')
-					]));
-		default:
-			var error = state.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(
-						$elm$core$Debug$toString(error))
-					]));
-	}
-};
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
@@ -6275,6 +6171,7 @@ var $author$project$Main$displayName = function (sectionType) {
 			return 'CONTACT';
 	}
 };
+var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Main$iconItem = function (icon) {
 	return A2(
 		$elm$html$Html$span,
@@ -6298,6 +6195,8 @@ var $author$project$Main$sectionId = function (sectionType) {
 			return 'contact-section';
 	}
 };
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$linkItem = function (sectionType) {
 	return A2(
 		$elm$html$Html$li,
@@ -6575,6 +6474,13 @@ var $author$project$Main$view = function (model) {
 																		_List_Nil,
 																		_List_fromArray(
 																			[
+																				$elm$html$Html$text('ネットワークスペシャリスト')
+																			])),
+																		A2(
+																		$elm$html$Html$li,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
 																				$elm$html$Html$text('データベーススペシャリスト')
 																			])),
 																		A2(
@@ -6603,7 +6509,7 @@ var $author$project$Main$view = function (model) {
 																		_List_Nil,
 																		_List_fromArray(
 																			[
-																				$elm$html$Html$text('TOEIC:635(L:350 R:285)')
+																				$elm$html$Html$text('TOEIC:635(L:350 R:285) 2021年7月')
 																			]))
 																	]))
 															]))
@@ -6948,8 +6854,7 @@ var $author$project$Main$view = function (model) {
 																					[
 																						$elm$html$Html$text('aochan')
 																					]))
-																			])),
-																		$author$project$Main$competitiveInfo(model.competitiveDataState)
+																			]))
 																	]))
 															]))
 													]))

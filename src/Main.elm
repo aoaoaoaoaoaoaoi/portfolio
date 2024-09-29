@@ -47,7 +47,7 @@ type DataState
 init : () -> ( Model, Cmd Msg )
 init _ =
     ( Model Waiting Waiting Japanese
-    , Cmd.batch [ getCompetitiveData, getRepositoryData ]
+    , Cmd.batch [ getRepositoryData ]
     )
 
 
@@ -208,11 +208,12 @@ view model =
                                 ]
                             , div []
                                 [ ul []
-                                    [ li [] [ text "データベーススペシャリスト" ]
+                                    [ li [] [ text "ネットワークスペシャリスト" ]
+                                    , li [] [ text "データベーススペシャリスト" ]
                                     , li [] [ text "情報処理安全確保支援士試験合格（情報処理安全確保支援士は未登録）" ]
                                     , li [] [ text "AWS Certified Solutions Architect - Associate" ]
                                     , li [] [ text "応用情報技術者" ]
-                                    , li [] [ text "TOEIC:635(L:350 R:285)" ]
+                                    , li [] [ text "TOEIC:635(L:350 R:285) 2021年7月" ]
                                     ]
                                 ]
                             ]
@@ -265,7 +266,7 @@ view model =
                                 [ ul []
                                     [ li [] [ a [ href "https://atcoder.jp/" ] [ text "AtCoder" ] ]
                                     , div [] [ span [] [ text "Name : " ], a [ href "https://atcoder.jp/users/aochan" ] [ text "aochan" ] ]
-                                    , competitiveInfo model.competitiveDataState
+                                    -- , competitiveInfo model.competitiveDataState
                                     ]
                                 ]
                             ]
